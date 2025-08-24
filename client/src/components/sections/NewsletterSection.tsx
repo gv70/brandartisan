@@ -48,7 +48,7 @@ export default function NewsletterSection() {
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-cream mb-6" data-testid="text-newsletter-title">
               Unisciti al mondo Mathilde
             </h2>
-            <p className="text-lg sm:text-xl text-cream/80 mb-12 max-w-2xl mx-auto" data-testid="text-newsletter-subtitle">
+            <p className="text-lg sm:text-xl text-cream mb-12 max-w-2xl mx-auto" data-testid="text-newsletter-subtitle">
               Ricevi in anteprima le nostre nuove creazioni, gli eventi esclusivi e i segreti della sartoria artigianale italiana.
             </p>
             
@@ -72,7 +72,7 @@ export default function NewsletterSection() {
                   {subscribeToNewsletter.isPending ? "Iscrizione..." : "Iscriviti"}
                 </button>
               </div>
-              <p className="text-cream/60 text-sm mt-4" data-testid="text-privacy-notice">
+              <p className="text-cream text-sm mt-4" data-testid="text-privacy-notice">
                 Non condivideremo mai la tua email. Potrai disiscriverti in qualsiasi momento.
               </p>
             </form>
