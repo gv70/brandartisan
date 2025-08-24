@@ -1,0 +1,52 @@
+Ispirazione da Memesi
+
+Eleganza sobria: uso generoso di spazio bianco, layout pulito e senza distrazioni, tipico minimalismo "bold in simplicity" 
+memesi.it
++3
+memesi.it
++3
+memesi.it
++3
+.
+
+Tipografia lineare: combinazione di font serif per titoli e sans-serif per testi, con gerarchia visiva chiara, armonica 
+memesi.it
+.
+
+Flusso narrativo: la pagina progredisce in modo sequenziale, inducendo lo scrolling lento e coinvolgente 
+memesi.it
+.
+
+Wireframe strutturato per Mathilde
+Sezione	Componente React Bits	Elementi chiave & ispirazioni
+1. Hero	Scroll Reveal	Headline + sottotitolo su sfondo neutro, tipografia elegante, CTA ben visibile
+2. Chi siamo	Scroll Stack + Animated Content	Testo storytelling (“Cuciamo storie...”), animazione ingresso sequenziale in stile Memesi
+3. Servizio Su Misura	Spotlight Card	Cards orizzontali con mini-ritratti dei passaggi (es. consulenza, fitting), effetto hover leggero
+4. Mini-collezioni	Stack	Sovrapposizione elegante di 2-3 thumbnail capsule, interattive ma minimal
+5. Valori / Manifesto	Animated List	Elenco con valori del brand, animazione leggera all’apparizione
+6. Chiusura / Newsletter CTA	Animated Content	Invito finale (“Unisciti al mondo Mathilde…”), con fade/scale elegante
+Layout ispirato a Memesi
+
+Layout verticale, pulito, con ampi margini laterali: richiamo diretto al senso di calma e raffinatezza del sito Memesi.
+
+Gerarchia testuale chiara: titoli serif ampi, paragrafi sans-serif rilassante alla lettura, come già nel brand concept.
+
+Spaziature generose tra le sezioni: favoriscono coreografia visiva e valorizzano i componenti animati.
+
+Visual Wireframe in parole
+
+Hero: testo centrale “Vestiti di Unicità.” animato al scroll, CTA sotto.
+
+Chi Siamo: blocco full-width, testo che entra con effetto fade-in, immagine atelier sul lato (opzionale).
+
+Su Misura: tre card orizzontali con hover spotlight—passaggi chiave.
+
+Mini-Collezioni: stack di immagini minimali affiancate come anteprima collezione.
+
+Valori: elenco verticali centrati, che si animano dolcemente.
+
+Newsletter: CTA box minimal a fondo pagina.
+
+Conclusione
+
+Questo wireframe prende la sobrietà ed eleganza di Memesi e la unisce con i componenti React Bits più adatti, per creare un sito Mathilde che sia moderno, raffinato e coerente con il posizionamento artigianale. Ogni elemento ha uno scopo estetico e funzionale, senza esuberanza visiva.

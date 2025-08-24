@@ -1,0 +1,80 @@
+Ruolo richiesto:
+Agisci come web designer + copywriter di brand sartoriale di fascia medio-alta. Devi creare una landing page elegante e minimalista per Mathilde, un nuovo brand di sartoria artigianale uomo e donna.
+
+Input allegato
+
+Ti allego un file che contiene:
+
+Tone of voice (elegante, narrativo, autentico, minimalista, accessibile ma raffinato)
+
+Copy già pronto (headline, CTA, storytelling, sezioni “Chi siamo”, social copy, newsletter intro)
+
+Brand positioning e valori (unicità, artigianalità, sostenibilità, autenticità, heritage italiano, design pulito).
+
+Devi usare questi contenuti come testo principale del sito, adattandoli alla struttura di una landing page moderna.
+
+Obiettivo
+
+Generare il codice del sito web (in React/Next.js o HTML+CSS/Tailwind) con una struttura chiara e responsive che presenti il brand Mathilde in modo elegante e coerente con i valori.
+
+Requisiti di Design
+
+Estetica: minimalista, elegante, ispirata al design nordico con calore mediterraneo.
+
+Palette colori: neutri raffinati (bianco panna, beige sabbia, grigio pietra chiaro, blu notte/petrolio, nero carbone + accento salvia o rosa cipria).
+
+Tipografia: titoli con un font serif elegante (es. Didot/Bodoni), testi con un sans-serif pulito (es. Montserrat, Lato).
+
+Fotografia e mood: immagini luminose, luce naturale, focus su dettagli sartoriali (tessuti, mani che cuciono, fitting in atelier).
+
+Layout: ampio spazio bianco, griglie pulite, call to action evidenti.
+
+CTA buttons: grandi, con bordi arrotondati, testi eleganti (“Scopri la Collezione Limitata”, “Prenota la tua Sartoria Su Misura”).
+
+Struttura della Landing Page
+
+Hero Section
+
+Headline + sottotitolo (dal file allegato)
+
+CTA primaria (collezione) e secondaria (su misura)
+
+Chi siamo
+
+Testo story-driven dal file
+
+Immagine/foto evocativa di atelier/tessuti
+
+Mini-collezioni
+
+Breve intro + CTA (“Scopri la Collezione Limitata”)
+
+Servizio Su Misura
+
+Testo che descrive l’esperienza
+
+CTA (“Prenota la tua Sartoria Su Misura”)
+
+Valori/Manifesto
+
+Elenco breve di valori chiave (artigianalità, unicità, sostenibilità, eleganza senza tempo)
+
+Newsletter
+
+Copy dal file allegato
+
+Form semplice con campo email e CTA (“Iscriviti”)
+
+Footer
+
+Contatti essenziali
+
+Social links (Instagram, Facebook, LinkedIn)
+
+Output richiesto
+
+Genera il codice completo del sito (React con Tailwind o HTML+CSS) pronto da usare.
+
+Inserisci i testi esattamente come forniti nel file allegato, senza modificarne il tone of voice.
+
+Mantieni stile e CTA coerenti in tutto il sito.
