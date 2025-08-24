@@ -22,7 +22,7 @@ export default function ValoriSection() {
       dotColor: "bg-leather-brown"
     },
     {
-      title: "Eleganza Senza Tempo",
+      title: "Eleganza senza tempo",
       description: "Creiamo capi destinati a durare, superando le mode passeggere con stile autentico.",
       color: "bg-green-primary/20",
       dotColor: "bg-green-primary"
@@ -35,7 +35,7 @@ export default function ValoriSection() {
         <ScrollReveal>
           <div className="mb-16">
             <h2 className="font-serif text-4xl md:text-5xl font-semibold text-text-primary mb-6" data-testid="text-valori-title">
-              I Nostri Valori
+              I nostri valori
             </h2>
             <p className="text-xl text-text-secondary" data-testid="text-valori-subtitle">
               Principi che guidano ogni nostro gesto, ogni scelta, ogni creazione.

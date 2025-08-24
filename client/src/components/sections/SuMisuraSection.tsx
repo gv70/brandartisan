@@ -33,7 +33,7 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
         <div className="text-center mb-16">
           <ScrollReveal>
             <h2 className="font-serif text-4xl md:text-5xl font-semibold text-text-primary mb-6" data-testid="text-su-misura-title">
-              Servizio Su Misura
+              Servizio su misura
             </h2>
             <p className="text-xl text-text-secondary max-w-3xl mx-auto" data-testid="text-su-misura-subtitle">
               Un'esperienza esclusiva che inizia con l'ascolto dei tuoi desideri e si conclude con un capo che diventa parte della tua identità.
@@ -69,7 +69,7 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
               className="bg-leather-brown text-cream px-10 py-4 rounded-full text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105"
               data-testid="button-prenota-su-misura"
             >
-              Prenota la tua Sartoria Su Misura
+Prenota la tua sartoria su misura
             </button>
           </ScrollReveal>
         </div>

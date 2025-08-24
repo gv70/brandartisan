@@ -16,7 +16,7 @@ export default function ChiSiamoSection() {
           <ScrollReveal delay={400}>
             <div>
               <h2 className="font-serif text-4xl md:text-5xl font-semibold text-text-primary mb-8" data-testid="text-chi-siamo-title">
-                Chi Siamo
+                Chi siamo
               </h2>
               <div className="space-y-6 text-lg leading-relaxed text-text-secondary">
                 <p data-testid="text-chi-siamo-paragraph-1">

@@ -47,14 +47,14 @@ export default function Navigation() {
               className="hover:text-green-primary transition-colors"
               data-testid="nav-su-misura"
             >
-              Su Misura
+              Su misura
             </button>
             <button
               onClick={() => scrollToSection('chi-siamo')}
               className="hover:text-green-primary transition-colors"
               data-testid="nav-chi-siamo"
             >
-              Chi Siamo
+              Chi siamo
             </button>
             <button
               onClick={() => scrollToSection('contatti')}
