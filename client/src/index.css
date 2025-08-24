@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(40, 33%, 98%);
+  --foreground: hsl(0, 0%, 17%);
+  --card: hsl(36, 25%, 96%);
+  --card-foreground: hsl(0, 0%, 17%);
+  --popover: hsl(40, 33%, 98%);
+  --popover-foreground: hsl(0, 0%, 17%);
+  --primary: hsl(208, 57%, 25%);
+  --primary-foreground: hsl(40, 33%, 98%);
+  --secondary: hsl(84, 17%, 56%);
+  --secondary-foreground: hsl(40, 33%, 98%);
+  --muted: hsl(33, 21%, 91%);
+  --muted-foreground: hsl(0, 0%, 45%);
+  --accent: hsl(33, 21%, 88%);
+  --accent-foreground: hsl(0, 0%, 17%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(33, 21%, 88%);
+  --input: hsl(33, 21%, 88%);
+  --ring: hsl(208, 57%, 25%);
+  
+  /* Custom Mathilde colors */
+  --cream: hsl(40, 33%, 98%);
+  --sand: hsl(36, 25%, 96%);
+  --stone: hsl(33, 21%, 88%);
+  --charcoal: hsl(0, 0%, 17%);
+  --navy: hsl(208, 57%, 25%);
+  --sage: hsl(84, 17%, 56%);
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: hsl(0, 0%, 8%);
+  --foreground: hsl(0, 0%, 95%);
+  --card: hsl(0, 0%, 10%);
+  --card-foreground: hsl(0, 0%, 95%);
+  --popover: hsl(0, 0%, 8%);
+  --popover-foreground: hsl(0, 0%, 95%);
+  --primary: hsl(208, 57%, 45%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(84, 17%, 36%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --muted: hsl(0, 0%, 15%);
+  --muted-foreground: hsl(0, 0%, 65%);
+  --accent: hsl(0, 0%, 15%);
+  --accent-foreground: hsl(0, 0%, 95%);
+  --destructive: hsl(0, 62%, 50%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --border: hsl(0, 0%, 15%);
+  --input: hsl(0, 0%, 15%);
+  --ring: hsl(208, 57%, 45%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-color: var(--cream);
+    color: var(--charcoal);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer components {
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stagger-item {
+    transition-delay: var(--delay, 0s);
+  }
+
+  .spotlight-card {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .spotlight-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  }
+
+  .collection-stack {
+    position: relative;
+  }
+
+  .collection-item {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .collection-stack:hover .collection-item:nth-child(1) {
+    transform: translateX(-12px) rotate(-3deg) scale(0.98);
+  }
+
+  .collection-stack:hover .collection-item:nth-child(2) {
+    transform: translateX(12px) rotate(3deg) scale(1.02);
+  }
+
+  .animated-list-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animated-list-item.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fade-scale.animate {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Memesi-inspired spacing */
+  .section-spacing {
+    @apply py-24 lg:py-32;
+  }
+
+  .container-spacing {
+    @apply px-6 lg:px-8;
+  }
+
+  /* Custom gradient backgrounds */
+  .gradient-cream-sand {
+    background: linear-gradient(to bottom, var(--cream), var(--sand));
+  }
+
+  .gradient-navy-overlay {
+    background: linear-gradient(135deg, var(--navy) 0%, hsl(208, 57%, 20%) 100%);
+  }
+}
