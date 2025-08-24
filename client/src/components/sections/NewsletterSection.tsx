@@ -41,14 +41,14 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 gradient-green-overlay">
+    <section className="py-16 sm:py-20 lg:section-spacing px-4 sm:px-6 lg:container-spacing gradient-green-overlay">
       <div className="max-w-4xl mx-auto text-center">
         <ScrollReveal>
           <div className="fade-scale animate">
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-cream mb-4 sm:mb-6" data-testid="text-newsletter-title">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-cream mb-6" data-testid="text-newsletter-title">
               Unisciti al mondo Mathilde
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-cream/80 mb-8 sm:mb-10 lg:mb-12 max-w-2xl mx-auto" data-testid="text-newsletter-subtitle">
+            <p className="text-lg sm:text-xl text-cream/80 mb-12 max-w-2xl mx-auto" data-testid="text-newsletter-subtitle">
               Ricevi in anteprima le nostre nuove creazioni, gli eventi esclusivi e i segreti della sartoria artigianale italiana.
             </p>
             
@@ -59,14 +59,14 @@ export default function NewsletterSection() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Il tuo indirizzo email"
-                  className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-full text-charcoal placeholder-charcoal/60 focus:outline-none focus:ring-2 focus:ring-sage text-sm sm:text-base"
+                  className="flex-1 px-6 py-4 rounded-full text-charcoal placeholder-charcoal/60 focus:outline-none focus:ring-2 focus:ring-sage"
                   required
                   data-testid="input-newsletter-email"
                 />
                 <button 
                   type="submit"
                   disabled={subscribeToNewsletter.isPending}
-                  className="bg-leather-brown text-cream px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-medium hover:bg-leather-hover transition-all whitespace-nowrap disabled:opacity-50 w-full sm:w-auto"
+                  className="bg-leather-brown text-cream px-8 py-4 rounded-full font-medium hover:bg-leather-hover transition-all whitespace-nowrap disabled:opacity-50 w-full sm:w-auto"
                   data-testid="button-newsletter-submit"
                 >
                   {subscribeToNewsletter.isPending ? "Iscrizione..." : "Iscriviti"}

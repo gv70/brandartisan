@@ -28,33 +28,33 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
   ];
 
   return (
-    <section id="su-misura" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-cream">
+    <section id="su-misura" className="py-16 sm:py-20 lg:section-spacing px-4 sm:px-6 lg:container-spacing bg-cream">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <div className="text-center mb-16">
           <ScrollReveal>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-4 sm:mb-6" data-testid="text-su-misura-title">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-text-primary mb-6" data-testid="text-su-misura-title">
               Servizio su misura
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-text-secondary max-w-3xl mx-auto" data-testid="text-su-misura-subtitle">
+            <p className="text-lg sm:text-xl text-text-secondary max-w-3xl mx-auto" data-testid="text-su-misura-subtitle">
               Un'esperienza esclusiva che inizia con l'ascolto dei tuoi desideri e si conclude con un capo che diventa parte della tua identità.
             </p>
           </ScrollReveal>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
             <ScrollReveal key={step.title} delay={index * 200}>
-              <SpotlightCard className="p-4 sm:p-6 lg:p-8">
+              <SpotlightCard className="p-6 lg:p-8">
                 <img 
                   src={step.image}
                   alt={step.alt}
-                  className="rounded-lg w-full h-40 sm:h-48 object-cover mb-4 sm:mb-6"
+                  className="rounded-lg w-full h-48 object-cover mb-6"
                   data-testid={`img-step-${index + 1}`}
                 />
-                <h3 className="font-serif text-lg sm:text-xl lg:text-2xl font-semibold text-text-primary mb-3 sm:mb-4" data-testid={`text-step-${index + 1}-title`}>
+                <h3 className="font-serif text-xl lg:text-2xl font-semibold text-text-primary mb-4" data-testid={`text-step-${index + 1}-title`}>
                   {step.title}
                 </h3>
-                <p className="text-sm sm:text-base text-text-secondary leading-relaxed" data-testid={`text-step-${index + 1}-description`}>
+                <p className="text-base text-text-secondary leading-relaxed" data-testid={`text-step-${index + 1}-description`}>
                   {step.description}
                 </p>
               </SpotlightCard>
@@ -62,11 +62,11 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
           ))}
         </div>
         
-        <div className="text-center mt-8 sm:mt-10 lg:mt-12">
+        <div className="text-center mt-12">
           <ScrollReveal delay={600}>
             <button 
               onClick={onBookingClick}
-              className="bg-leather-brown text-cream px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-full text-base sm:text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105 w-full sm:w-auto"
+              className="bg-leather-brown text-cream px-10 py-4 rounded-full text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105 w-full sm:w-auto"
               data-testid="button-prenota-su-misura"
             >
 Prenota la tua sartoria su misura
