@@ -7,8 +7,8 @@ export default function ChiSiamoSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           <ScrollReveal delay={200}>
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-              alt="Luxury tailoring atelier with natural lighting and fabric details" 
+              src="https://plus.unsplash.com/premium_photo-1682089428454-8f21f3ed62f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+              alt="Sarta che prende le misure di spalle a una cliente in atelier artigianale" 
               className="rounded-xl shadow-lg w-full h-auto"
               data-testid="img-atelier"
             />
