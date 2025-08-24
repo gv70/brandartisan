@@ -60,6 +60,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         serif: ["var(--font-serif)", "Georgia", "serif"],
+        brand: ["var(--font-brand)", "Georgia", "serif"],
         mono: ["var(--font-mono)", "Menlo", "monospace"],
       },
       spacing: {

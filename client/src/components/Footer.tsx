@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <div className="sm:col-span-2 md:col-span-2">
-            <div className="font-serif text-3xl font-semibold mb-6" data-testid="text-footer-brand">
+            <div className="font-brand text-3xl font-semibold mb-6" data-testid="text-footer-brand">
               Mathilde
             </div>
             <p className="text-cream/80 leading-relaxed mb-6" data-testid="text-footer-description">

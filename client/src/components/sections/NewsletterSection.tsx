@@ -46,7 +46,7 @@ export default function NewsletterSection() {
         <ScrollReveal>
           <div className="fade-scale animate">
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-cream mb-6" data-testid="text-newsletter-title">
-              Unisciti al mondo Mathilde
+              Unisciti al mondo <span className="font-brand">Mathilde</span>
             </h2>
             <p className="text-lg sm:text-xl text-cream mb-12 max-w-2xl mx-auto" data-testid="text-newsletter-subtitle">
               Ricevi in anteprima le nostre nuove creazioni, gli eventi esclusivi e i segreti della sartoria artigianale italiana.

@@ -31,7 +31,7 @@ export default function Navigation() {
     )}>
       <div className="max-w-7xl mx-auto container-spacing py-4">
         <div className="flex justify-between items-center">
-          <div className="font-serif text-2xl font-semibold text-text-primary" data-testid="logo">
+          <div className="font-brand text-2xl font-semibold text-text-primary" data-testid="logo">
             Mathilde
           </div>
           <div className="hidden md:flex space-x-8 text-sm font-medium">
