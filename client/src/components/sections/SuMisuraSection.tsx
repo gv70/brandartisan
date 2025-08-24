@@ -32,10 +32,10 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <ScrollReveal>
-            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-charcoal mb-6" data-testid="text-su-misura-title">
+            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-text-primary mb-6" data-testid="text-su-misura-title">
               Servizio Su Misura
             </h2>
-            <p className="text-xl text-charcoal/80 max-w-3xl mx-auto" data-testid="text-su-misura-subtitle">
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto" data-testid="text-su-misura-subtitle">
               Un'esperienza esclusiva che inizia con l'ascolto dei tuoi desideri e si conclude con un capo che diventa parte della tua identità.
             </p>
           </ScrollReveal>
@@ -51,10 +51,10 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
                   className="rounded-lg w-full h-48 object-cover mb-6"
                   data-testid={`img-step-${index + 1}`}
                 />
-                <h3 className="font-serif text-2xl font-semibold text-charcoal mb-4" data-testid={`text-step-${index + 1}-title`}>
+                <h3 className="font-serif text-2xl font-semibold text-text-primary mb-4" data-testid={`text-step-${index + 1}-title`}>
                   {step.title}
                 </h3>
-                <p className="text-charcoal/80 leading-relaxed" data-testid={`text-step-${index + 1}-description`}>
+                <p className="text-text-secondary leading-relaxed" data-testid={`text-step-${index + 1}-description`}>
                   {step.description}
                 </p>
               </SpotlightCard>
@@ -66,7 +66,7 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
           <ScrollReveal delay={600}>
             <button 
               onClick={onBookingClick}
-              className="bg-sage text-cream px-10 py-4 rounded-full text-lg font-medium hover:bg-sage/90 transition-all transform hover:scale-105"
+              className="bg-leather-brown text-cream px-10 py-4 rounded-full text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105"
               data-testid="button-prenota-su-misura"
             >
               Prenota la tua Sartoria Su Misura

@@ -62,7 +62,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-cream text-charcoal overflow-x-hidden">
+    <div className="min-h-screen bg-background-light text-text-primary overflow-x-hidden">
       <Navigation />
       
       <main>

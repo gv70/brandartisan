@@ -41,7 +41,7 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="section-spacing container-spacing gradient-navy-overlay">
+    <section className="section-spacing container-spacing gradient-green-overlay">
       <div className="max-w-4xl mx-auto text-center">
         <ScrollReveal>
           <div className="fade-scale animate">
@@ -66,7 +66,7 @@ export default function NewsletterSection() {
                 <button 
                   type="submit"
                   disabled={subscribeToNewsletter.isPending}
-                  className="bg-sage text-cream px-8 py-4 rounded-full font-medium hover:bg-sage/90 transition-all whitespace-nowrap disabled:opacity-50"
+                  className="bg-leather-brown text-cream px-8 py-4 rounded-full font-medium hover:bg-leather-hover transition-all whitespace-nowrap disabled:opacity-50"
                   data-testid="button-newsletter-submit"
                 >
                   {subscribeToNewsletter.isPending ? "Iscrizione..." : "Iscriviti"}

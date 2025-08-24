@@ -2,7 +2,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function ChiSiamoSection() {
   return (
-    <section id="chi-siamo" className="section-spacing container-spacing bg-sand">
+    <section id="chi-siamo" className="section-spacing container-spacing bg-background-light">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <ScrollReveal delay={200}>
@@ -15,10 +15,10 @@ export default function ChiSiamoSection() {
           </ScrollReveal>
           <ScrollReveal delay={400}>
             <div>
-              <h2 className="font-serif text-4xl md:text-5xl font-semibold text-charcoal mb-8" data-testid="text-chi-siamo-title">
+              <h2 className="font-serif text-4xl md:text-5xl font-semibold text-text-primary mb-8" data-testid="text-chi-siamo-title">
                 Chi Siamo
               </h2>
-              <div className="space-y-6 text-lg leading-relaxed text-charcoal/80">
+              <div className="space-y-6 text-lg leading-relaxed text-text-secondary">
                 <p data-testid="text-chi-siamo-paragraph-1">
                   Nata sul Lago di Como e cresciuta tra Lecco e Milano, Mathilde è più di una sartoria: è il luogo dove la tradizione artigianale italiana incontra lo stile minimalista contemporaneo.
                 </p>

@@ -5,33 +5,39 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(40, 33%, 98%);
-  --foreground: hsl(0, 0%, 17%);
-  --card: hsl(36, 25%, 96%);
-  --card-foreground: hsl(0, 0%, 17%);
-  --popover: hsl(40, 33%, 98%);
-  --popover-foreground: hsl(0, 0%, 17%);
-  --primary: hsl(208, 57%, 25%);
-  --primary-foreground: hsl(40, 33%, 98%);
-  --secondary: hsl(84, 17%, 56%);
-  --secondary-foreground: hsl(40, 33%, 98%);
-  --muted: hsl(33, 21%, 91%);
-  --muted-foreground: hsl(0, 0%, 45%);
-  --accent: hsl(33, 21%, 88%);
-  --accent-foreground: hsl(0, 0%, 17%);
-  --destructive: hsl(0, 84%, 60%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --border: hsl(33, 21%, 88%);
-  --input: hsl(33, 21%, 88%);
-  --ring: hsl(208, 57%, 25%);
+  --background: #f8f6f4;
+  --foreground: #1a1a1a;
+  --card: #efe3d4;
+  --card-foreground: #1a1a1a;
+  --popover: #f8f6f4;
+  --popover-foreground: #1a1a1a;
+  --primary: #0b3d2e;
+  --primary-foreground: #efe3d4;
+  --secondary: #8c6a4a;
+  --secondary-foreground: #f8f6f4;
+  --muted: #d9c6b0;
+  --muted-foreground: #4f4f4f;
+  --accent: #d9c6b0;
+  --accent-foreground: #1a1a1a;
+  --destructive: #b94a48;
+  --destructive-foreground: #f8f6f4;
+  --border: #e0dedb;
+  --input: #e0dedb;
+  --ring: #0b3d2e;
   
   /* Custom Mathilde colors */
-  --cream: hsl(40, 33%, 98%);
-  --sand: hsl(36, 25%, 96%);
-  --stone: hsl(33, 21%, 88%);
-  --charcoal: hsl(0, 0%, 17%);
-  --navy: hsl(208, 57%, 25%);
-  --sage: hsl(84, 17%, 56%);
+  --cream: #efe3d4;
+  --background-light: #f8f6f4;
+  --warm-beige: #d9c6b0;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4f4f4f;
+  --green-primary: #0b3d2e;
+  --green-hover: #145c45;
+  --leather-brown: #8c6a4a;
+  --leather-hover: #a17856;
+  --border-subtle: #e0dedb;
+  --success: #2f7a4d;
+  --error: #b94a48;
   
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
@@ -68,8 +74,8 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background-color: var(--cream);
-    color: var(--charcoal);
+    background-color: var(--background-light);
+    color: var(--text-primary);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -150,11 +156,11 @@
   }
 
   /* Custom gradient backgrounds */
-  .gradient-cream-sand {
-    background: linear-gradient(to bottom, var(--cream), var(--sand));
+  .gradient-cream-beige {
+    background: linear-gradient(to bottom, var(--cream), var(--warm-beige));
   }
 
-  .gradient-navy-overlay {
-    background: linear-gradient(135deg, var(--navy) 0%, hsl(208, 57%, 20%) 100%);
+  .gradient-green-overlay {
+    background: linear-gradient(135deg, var(--green-primary) 0%, #0a3327 100%);
   }
 }

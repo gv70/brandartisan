@@ -6,14 +6,14 @@ interface CollezioniSectionProps {
 
 export default function CollezioniSection({ onCollezioneClick }: CollezioniSectionProps) {
   return (
-    <section id="collezioni" className="section-spacing container-spacing bg-stone">
+    <section id="collezioni" className="section-spacing container-spacing bg-warm-beige">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <ScrollReveal>
-            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-charcoal mb-6" data-testid="text-collezioni-title">
+            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-text-primary mb-6" data-testid="text-collezioni-title">
               Collezioni Capsule
             </h2>
-            <p className="text-xl text-charcoal/80 max-w-2xl mx-auto" data-testid="text-collezioni-subtitle">
+            <p className="text-xl text-text-secondary max-w-2xl mx-auto" data-testid="text-collezioni-subtitle">
               Creazioni limitate che interpretano l'eleganza contemporanea attraverso la maestria artigianale italiana.
             </p>
           </ScrollReveal>
@@ -45,29 +45,29 @@ export default function CollezioniSection({ onCollezioneClick }: CollezioniSecti
           
           <ScrollReveal delay={400}>
             <div>
-              <h3 className="font-serif text-3xl font-semibold text-charcoal mb-6" data-testid="text-collezione-season">
+              <h3 className="font-serif text-3xl font-semibold text-text-primary mb-6" data-testid="text-collezione-season">
                 Autunno-Inverno 2024
               </h3>
-              <p className="text-lg text-charcoal/80 mb-8 leading-relaxed" data-testid="text-collezione-description">
+              <p className="text-lg text-text-secondary mb-8 leading-relaxed" data-testid="text-collezione-description">
                 Una collezione che celebra la bellezza del tempo che rallenta, con tonalità calde e materiali che raccontano storie di comfort raffinato e eleganza senza tempo.
               </p>
               <div className="space-y-4 mb-8">
-                <div className="flex items-center text-charcoal/80" data-testid="text-feature-1">
-                  <div className="w-2 h-2 bg-sage rounded-full mr-3"></div>
+                <div className="flex items-center text-text-secondary" data-testid="text-feature-1">
+                  <div className="w-2 h-2 bg-leather-brown rounded-full mr-3"></div>
                   <span>15 pezzi unici realizzati a mano</span>
                 </div>
-                <div className="flex items-center text-charcoal/80" data-testid="text-feature-2">
-                  <div className="w-2 h-2 bg-sage rounded-full mr-3"></div>
+                <div className="flex items-center text-text-secondary" data-testid="text-feature-2">
+                  <div className="w-2 h-2 bg-leather-brown rounded-full mr-3"></div>
                   <span>Tessuti sostenibili e certificati</span>
                 </div>
-                <div className="flex items-center text-charcoal/80" data-testid="text-feature-3">
-                  <div className="w-2 h-2 bg-sage rounded-full mr-3"></div>
+                <div className="flex items-center text-text-secondary" data-testid="text-feature-3">
+                  <div className="w-2 h-2 bg-leather-brown rounded-full mr-3"></div>
                   <span>Numerazione limitata e personalizzabile</span>
                 </div>
               </div>
               <button 
                 onClick={onCollezioneClick}
-                className="border-2 border-navy text-navy px-8 py-3 rounded-full font-medium hover:bg-navy hover:text-cream transition-all"
+                className="border-2 border-green-primary text-green-primary px-8 py-3 rounded-full font-medium hover:bg-green-primary hover:text-cream transition-all"
                 data-testid="button-scopri-collezione"
               >
                 Scopri la Collezione Limitata

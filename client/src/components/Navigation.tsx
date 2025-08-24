@@ -27,38 +27,38 @@ export default function Navigation() {
   return (
     <nav className={cn(
       "fixed top-0 w-full z-50 transition-all duration-300",
-      isScrolled ? "bg-cream/95 backdrop-blur-sm border-b border-stone/20" : "bg-transparent"
+      isScrolled ? "bg-cream/95 backdrop-blur-sm border-b border-subtle/20" : "bg-transparent"
     )}>
       <div className="max-w-7xl mx-auto container-spacing py-4">
         <div className="flex justify-between items-center">
-          <div className="font-serif text-2xl font-semibold text-charcoal" data-testid="logo">
+          <div className="font-serif text-2xl font-semibold text-text-primary" data-testid="logo">
             Mathilde
           </div>
           <div className="hidden md:flex space-x-8 text-sm font-medium">
             <button
               onClick={() => scrollToSection('collezioni')}
-              className="hover:text-navy transition-colors"
+              className="hover:text-green-primary transition-colors"
               data-testid="nav-collezioni"
             >
               Collezioni
             </button>
             <button
               onClick={() => scrollToSection('su-misura')}
-              className="hover:text-navy transition-colors"
+              className="hover:text-green-primary transition-colors"
               data-testid="nav-su-misura"
             >
               Su Misura
             </button>
             <button
               onClick={() => scrollToSection('chi-siamo')}
-              className="hover:text-navy transition-colors"
+              className="hover:text-green-primary transition-colors"
               data-testid="nav-chi-siamo"
             >
               Chi Siamo
             </button>
             <button
               onClick={() => scrollToSection('contatti')}
-              className="hover:text-navy transition-colors"
+              className="hover:text-green-primary transition-colors"
               data-testid="nav-contatti"
             >
               Contatti

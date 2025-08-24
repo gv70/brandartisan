@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer id="contatti" className="bg-charcoal text-cream py-16 container-spacing">
+    <footer id="contatti" className="bg-text-primary text-cream py-16 container-spacing">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">

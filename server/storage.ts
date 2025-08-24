@@ -56,6 +56,8 @@ export class MemStorage implements IStorage {
     const request: ConsultationRequest = { 
       ...insertRequest, 
       id,
+      message: insertRequest.message || null,
+      phone: insertRequest.phone || null,
       createdAt: new Date()
     };
     this.consultationRequests.set(id, request);

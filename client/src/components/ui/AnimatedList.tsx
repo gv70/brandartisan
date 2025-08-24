@@ -36,7 +36,7 @@ export default function AnimatedList({
   const childrenArray = Array.isArray(children) ? children : [children];
 
   return (
-    <div ref={elementRef} className={cn("animated-list", className)}>
+    <div ref={elementRef as React.RefObject<HTMLDivElement>} className={cn("animated-list", className)}>
       {childrenArray.map((child, index) => (
         <div
           key={index}

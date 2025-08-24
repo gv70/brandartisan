@@ -20,7 +20,7 @@ export default function ScrollReveal({
 
   return (
     <div
-      ref={elementRef}
+      ref={elementRef as React.RefObject<HTMLDivElement>}
       className={cn(
         "scroll-reveal transition-all duration-700 ease-out",
         isVisible ? "revealed" : "",
