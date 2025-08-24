@@ -1,13 +1,13 @@
 export default function Footer() {
   return (
-    <footer id="contatti" className="bg-text-primary text-cream py-16 container-spacing">
+    <footer id="contatti" className="bg-text-primary text-cream py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
-            <div className="font-serif text-3xl font-semibold mb-6" data-testid="text-footer-brand">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="sm:col-span-2 lg:col-span-2">
+            <div className="font-serif text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6" data-testid="text-footer-brand">
               Mathilde
             </div>
-            <p className="text-cream/80 leading-relaxed mb-6" data-testid="text-footer-description">
+            <p className="text-sm sm:text-base text-cream/80 leading-relaxed mb-4 sm:mb-6" data-testid="text-footer-description">
               Sartoria artigianale contemporanea che unisce tradizione italiana e visione internazionale per creare capi unici e sostenibili.
             </p>
             <div className="flex space-x-4">
@@ -39,8 +39,8 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4" data-testid="text-footer-contact-title">Contatti</h4>
-            <div className="space-y-2 text-cream/80">
+            <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base" data-testid="text-footer-contact-title">Contatti</h4>
+            <div className="space-y-1 sm:space-y-2 text-cream/80 text-sm sm:text-base">
               <p data-testid="text-address">Via dell'Eleganza 12</p>
               <p data-testid="text-city">Milano, 20121</p>
               <p data-testid="text-phone">+39 02 1234 5678</p>
@@ -49,8 +49,8 @@ export default function Footer() {
           </div>
           
           <div>
-            <h4 className="font-semibold mb-4" data-testid="text-footer-hours-title">Orari atelier</h4>
-            <div className="space-y-2 text-cream/80">
+            <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base" data-testid="text-footer-hours-title">Orari atelier</h4>
+            <div className="space-y-1 sm:space-y-2 text-cream/80 text-sm sm:text-base">
               <p data-testid="text-hours-weekdays">Lun - Ven: 10:00 - 19:00</p>
               <p data-testid="text-hours-saturday">Sabato: 10:00 - 18:00</p>
               <p data-testid="text-hours-sunday">Domenica: Su appuntamento</p>
@@ -58,8 +58,8 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-cream/20 mt-12 pt-8 text-center text-cream/60">
-          <p data-testid="text-copyright">&copy; 2024 Mathilde. Tutti i diritti riservati.</p>
+        <div className="border-t border-cream/20 mt-8 sm:mt-12 pt-6 sm:pt-8 text-center text-cream/60">
+          <p data-testid="text-copyright" className="text-xs sm:text-sm">&copy; 2024 Mathilde. Tutti i diritti riservati.</p>
         </div>
       </div>
     </footer>
