@@ -1,4 +1,5 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import videoBackground from "@assets/Creazione_Video_Introduzione_Sartoria_Artigianale_1756064437145.mp4";
 
 interface HeroSectionProps {
   onCollezioneClick: () => void;
@@ -7,29 +8,44 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onCollezioneClick, onSuMisuraClick }: HeroSectionProps) {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-cream-beige container-spacing pt-20">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="min-h-screen relative flex items-center justify-center overflow-hidden">
+      {/* Video Background */}
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        data-testid="video-background"
+      >
+        <source src={videoBackground} type="video/mp4" />
+      </video>
+      
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-text-primary/20 via-text-primary/10 to-text-primary/30 z-10"></div>
+      
+      <div className="relative z-20 max-w-4xl mx-auto text-center container-spacing pt-20">
         <ScrollReveal>
-          <h1 className="font-serif text-5xl md:text-7xl font-bold text-text-primary mb-6 leading-tight" data-testid="hero-title">
+          <h1 className="font-serif text-5xl md:text-7xl font-bold text-cream mb-6 leading-tight drop-shadow-lg" data-testid="hero-title">
             Vestiti di Unicità.
           </h1>
-          <p className="text-xl md:text-2xl text-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed" data-testid="hero-subtitle">
-Capi sartoriali artigianali uomo & donna, creati su misura per la tua eleganza personale.
+          <p className="text-xl md:text-2xl text-cream/90 mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-md" data-testid="hero-subtitle">
+            Capi sartoriali artigianali uomo & donna, creati su misura per la tua eleganza personale.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
             <button 
               onClick={onCollezioneClick}
-              className="bg-green-primary text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-green-hover transition-all transform hover:scale-105"
+              className="bg-green-primary text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-green-hover transition-all transform hover:scale-105 shadow-lg"
               data-testid="button-collezione-primary"
             >
-Scopri la collezione limitata
+              Scopri la collezione limitata
             </button>
             <button 
               onClick={onSuMisuraClick}
-              className="border-2 border-leather-brown text-leather-brown px-8 py-4 rounded-full text-lg font-medium hover:bg-leather-brown hover:text-cream transition-all"
+              className="border-2 border-cream text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-cream hover:text-green-primary transition-all shadow-lg backdrop-blur-sm"
               data-testid="button-su-misura-secondary"
             >
-Prenota la tua sartoria su misura
+              Prenota la tua sartoria su misura
             </button>
           </div>
         </ScrollReveal>
