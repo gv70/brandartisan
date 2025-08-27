@@ -1,7 +1,8 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertNewsletterSubscriptionSchema, insertConsultationRequestSchema } from "@shared/schema";
+import { insertNewsletterSubscriptionSchema, insertConsultationRequestSchema, insertGiftRequestSchema } from "@shared/schema";
+import { sendGiftRequestEmail } from "./emailService";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -47,6 +48,49 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Get consultation requests error:", error);
       res.status(500).json({ error: "Failed to fetch consultation requests" });
+    }
+  });
+
+  // Gift request endpoint
+  app.post("/api/gift/request", async (req, res) => {
+    try {
+      const validatedData = insertGiftRequestSchema.parse(req.body);
+      
+      // Save to storage
+      const request = await storage.createGiftRequest(validatedData);
+      
+      // Try to send email
+      const emailResult = await sendGiftRequestEmail(validatedData);
+      
+      if (emailResult.success) {
+        res.json({ success: true, request, emailSent: true });
+      } else {
+        // Email fallback - return data for client to open email app
+        res.json({ 
+          success: true, 
+          request, 
+          emailSent: false,
+          fallbackEmail: emailResult.fallbackEmail
+        });
+      }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid request data", details: error.errors });
+      } else {
+        console.error("Gift request error:", error);
+        res.status(500).json({ error: "Failed to submit gift request" });
+      }
+    }
+  });
+
+  // Get all gift requests (for admin purposes)
+  app.get("/api/gift/requests", async (req, res) => {
+    try {
+      const requests = await storage.getGiftRequests();
+      res.json(requests);
+    } catch (error) {
+      console.error("Get gift requests error:", error);
+      res.status(500).json({ error: "Failed to fetch gift requests" });
     }
   });
 

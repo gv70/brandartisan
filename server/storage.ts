@@ -2,7 +2,9 @@ import {
   type NewsletterSubscription, 
   type InsertNewsletterSubscription,
   type ConsultationRequest,
-  type InsertConsultationRequest
+  type InsertConsultationRequest,
+  type GiftRequest,
+  type InsertGiftRequest
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -14,15 +16,21 @@ export interface IStorage {
   // Consultation requests
   createConsultationRequest(request: InsertConsultationRequest): Promise<ConsultationRequest>;
   getConsultationRequests(): Promise<ConsultationRequest[]>;
+  
+  // Gift requests
+  createGiftRequest(request: InsertGiftRequest): Promise<GiftRequest>;
+  getGiftRequests(): Promise<GiftRequest[]>;
 }
 
 export class MemStorage implements IStorage {
   private newsletterSubscriptions: Map<string, NewsletterSubscription>;
   private consultationRequests: Map<string, ConsultationRequest>;
+  private giftRequests: Map<string, GiftRequest>;
 
   constructor() {
     this.newsletterSubscriptions = new Map();
     this.consultationRequests = new Map();
+    this.giftRequests = new Map();
   }
 
   async createNewsletterSubscription(insertSubscription: InsertNewsletterSubscription): Promise<NewsletterSubscription> {
@@ -66,6 +74,24 @@ export class MemStorage implements IStorage {
 
   async getConsultationRequests(): Promise<ConsultationRequest[]> {
     return Array.from(this.consultationRequests.values());
+  }
+
+  async createGiftRequest(insertRequest: InsertGiftRequest): Promise<GiftRequest> {
+    const id = randomUUID();
+    const request: GiftRequest = { 
+      ...insertRequest, 
+      id,
+      telefono: insertRequest.telefono || null,
+      messaggio: insertRequest.messaggio || null,
+      importo: insertRequest.importo || null,
+      createdAt: new Date()
+    };
+    this.giftRequests.set(id, request);
+    return request;
+  }
+
+  async getGiftRequests(): Promise<GiftRequest[]> {
+    return Array.from(this.giftRequests.values());
   }
 }
 

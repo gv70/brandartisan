@@ -31,30 +31,28 @@ export default function RegalaUnicitaDialog({ children }: RegalaUnicitaDialogPro
 
   const sendGiftRequest = useMutation({
     mutationFn: async (data: typeof formData) => {
-      // Simula invio email - in produzione integreresti con un servizio di email
-      const emailBody = `
-Richiesta Buono Regalo Mathilde
-
-Dati del richiedente:
-- Nome: ${data.nome}
-- Email: ${data.email}
-- Telefono: ${data.telefono}
-
-Destinatario del regalo:
-- Nome: ${data.nomeDestinatario}
-
-Importo desiderato: ${data.importo}
-
-Messaggio personalizzato:
-${data.messaggio}
-      `;
+      const response = await fetch("/api/gift/request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
       
-      // Apri client email
-      const subject = encodeURIComponent("Richiesta Buono Regalo Mathilde");
-      const body = encodeURIComponent(emailBody);
-      window.open(`mailto:info@mathilde.it?subject=${subject}&body=${body}`, '_blank');
+      if (!response.ok) {
+        throw new Error("Failed to send gift request");
+      }
       
-      return { success: true };
+      const result = await response.json();
+      
+      // Se l'email non è stata inviata automaticamente, apri il client email come fallback
+      if (!result.emailSent && result.fallbackEmail) {
+        const subject = encodeURIComponent(result.fallbackEmail.subject);
+        const body = encodeURIComponent(result.fallbackEmail.body);
+        window.open(`mailto:${result.fallbackEmail.to}?subject=${subject}&body=${body}`, '_blank');
+      }
+      
+      return result;
     },
     onSuccess: () => {
       toast({
@@ -115,7 +113,7 @@ ${data.messaggio}
         <form onSubmit={handleSubmit} className="space-y-6 mt-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="nome">Nome e Cognome *</Label>
+              <Label htmlFor="nome">Nome e cognome *</Label>
               <Input
                 id="nome"
                 value={formData.nome}

@@ -19,6 +19,17 @@ export const consultationRequests = pgTable("consultation_requests", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const giftRequests = pgTable("gift_requests", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  nome: text("nome").notNull(),
+  email: text("email").notNull(),
+  telefono: text("telefono"),
+  nomeDestinatario: text("nome_destinatario").notNull(),
+  messaggio: text("messaggio"),
+  importo: text("importo"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const insertNewsletterSubscriptionSchema = createInsertSchema(newsletterSubscriptions).pick({
   email: true,
 });
@@ -31,8 +42,20 @@ export const insertConsultationRequestSchema = createInsertSchema(consultationRe
   service: true,
 });
 
+export const insertGiftRequestSchema = createInsertSchema(giftRequests).pick({
+  nome: true,
+  email: true,
+  telefono: true,
+  nomeDestinatario: true,
+  messaggio: true,
+  importo: true,
+});
+
 export type InsertNewsletterSubscription = z.infer<typeof insertNewsletterSubscriptionSchema>;
 export type NewsletterSubscription = typeof newsletterSubscriptions.$inferSelect;
 
 export type InsertConsultationRequest = z.infer<typeof insertConsultationRequestSchema>;
 export type ConsultationRequest = typeof consultationRequests.$inferSelect;
+
+export type InsertGiftRequest = z.infer<typeof insertGiftRequestSchema>;
+export type GiftRequest = typeof giftRequests.$inferSelect;
