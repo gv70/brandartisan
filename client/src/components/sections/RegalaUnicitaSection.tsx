@@ -1,4 +1,5 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import RegalaUnicitaDialog from "@/components/ui/RegalaUnicitaDialog";
 
 export default function RegalaUnicitaSection() {
   return (
@@ -38,13 +39,14 @@ export default function RegalaUnicitaSection() {
                   <span>Confezione regalo elegante inclusa</span>
                 </div>
               </div>
-              <button 
-                onClick={() => window.open('mailto:info@mathilde.it?subject=Buono Regalo Mathilde', '_blank')}
-                className="bg-green-primary text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-green-hover transition-all transform hover:scale-105 shadow-xl w-full sm:w-auto"
-                data-testid="button-regala-unicita-contact"
-              >
-                Regala unicità
-              </button>
+              <RegalaUnicitaDialog>
+                <button 
+                  className="bg-green-primary text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-green-hover transition-all transform hover:scale-105 shadow-xl w-full sm:w-auto"
+                  data-testid="button-regala-unicita-contact"
+                >
+                  Regala unicità
+                </button>
+              </RegalaUnicitaDialog>
             </div>
           </ScrollReveal>
         </div>

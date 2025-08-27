@@ -1,4 +1,5 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import RegalaUnicitaDialog from "@/components/ui/RegalaUnicitaDialog";
 import videoBackground from "@assets/Creazione_Video_Introduzione_Sartoria_Artigianale_1756064437145.mp4";
 
 interface HeroSectionProps {
@@ -50,19 +51,14 @@ export default function HeroSection({ onCollezioneClick, onSuMisuraClick }: Hero
             >
               Prenota la tua sartoria su misura
             </button>
-            <button 
-              onClick={() => {
-                const element = document.getElementById('regala-unicita');
-                if (element) {
-                  const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
-                  window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-                }
-              }}
-              className="bg-leather-brown text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105 shadow-xl w-full sm:w-auto"
-              data-testid="button-regala-unicita"
-            >
-              Regala unicità
-            </button>
+            <RegalaUnicitaDialog>
+              <button 
+                className="bg-leather-brown text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105 shadow-xl w-full sm:w-auto"
+                data-testid="button-regala-unicita"
+              >
+                Regala unicità
+              </button>
+            </RegalaUnicitaDialog>
           </div>
         </ScrollReveal>
       </div>
