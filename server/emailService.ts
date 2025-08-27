@@ -1,15 +1,18 @@
 import nodemailer from 'nodemailer';
 import type { InsertGiftRequest } from '@shared/schema';
 
-// Configurazione email con Gmail gratuito
+// Configurazione email con Microsoft 365 Essential
 const createTransporter = () => {
-  // Per ora usa la configurazione più semplice possibile
-  // L'utente potrà configurare Gmail più tardi se vuole
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp-mail.outlook.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.GMAIL_USER || 'info@mathilde.it',
-      pass: process.env.GMAIL_APP_PASSWORD || 'your-app-password'
+      user: process.env.OUTLOOK_EMAIL || 'info@mathilde.it',
+      pass: process.env.OUTLOOK_PASSWORD || 'your-password'
+    },
+    tls: {
+      ciphers: 'SSLv3'
     }
   });
 };
@@ -53,8 +56,8 @@ export async function sendGiftRequestEmail(giftData: InsertGiftRequest) {
     `;
     
     await transporter.sendMail({
-      from: process.env.GMAIL_USER || 'info@mathilde.it',
-      to: 'info@mathilde.it', // Email di destinazione dell'atelier
+      from: process.env.OUTLOOK_EMAIL || 'info@mathilde.it',
+      to: process.env.OUTLOOK_EMAIL || 'info@mathilde.it', // Email di destinazione dell'atelier
       subject: `🎁 Nuova Richiesta Buono Regalo da ${giftData.nome}`,
       html: htmlContent,
       text: `

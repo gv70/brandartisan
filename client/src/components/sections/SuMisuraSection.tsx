@@ -1,5 +1,6 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SpotlightCard from "@/components/ui/SpotlightCard";
+import CalendlyWidget from "@/components/ui/CalendlyWidget";
 
 interface SuMisuraSectionProps {
   onBookingClick: () => void;
@@ -64,13 +65,25 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
         
         <div className="text-center mt-12">
           <ScrollReveal delay={600}>
-            <button 
-              onClick={onBookingClick}
-              className="bg-leather-brown text-cream px-10 py-4 rounded-full text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105 w-full sm:w-auto"
-              data-testid="button-prenota-su-misura"
-            >
-Prenota la tua sartoria su misura
-            </button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <CalendlyWidget
+                url="https://calendly.com/mathilde-sartoria/consulenza-su-misura"
+                text="Prenota consulenza"
+                className="bg-leather-brown text-cream px-10 py-4 rounded-full text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105 w-full sm:w-auto"
+                prefill={{
+                  customAnswers: {
+                    a1: "Sartoria Su Misura"
+                  }
+                }}
+              />
+              <button 
+                onClick={onBookingClick}
+                className="border-2 border-leather-brown text-leather-brown px-10 py-4 rounded-full text-lg font-medium hover:bg-leather-brown hover:text-cream transition-all w-full sm:w-auto"
+                data-testid="button-info-su-misura"
+              >
+                Richiedi informazioni
+              </button>
+            </div>
           </ScrollReveal>
         </div>
       </div>

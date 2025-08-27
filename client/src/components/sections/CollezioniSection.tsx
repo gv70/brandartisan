@@ -1,4 +1,5 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import CalendlyWidget from "@/components/ui/CalendlyWidget";
 
 interface CollezioniSectionProps {
   onCollezioneClick: () => void;
@@ -96,13 +97,25 @@ export default function CollezioniSection({
                   <span>Numerazione limitata e personalizzabile</span>
                 </div>
               </div>
-              <button
-                onClick={onCollezioneClick}
-                className="border-2 border-green-primary text-green-primary px-8 py-3 rounded-full font-medium hover:bg-green-primary hover:text-cream transition-all w-full sm:w-auto"
-                data-testid="button-scopri-collezione"
-              >
-                Scopri la collezione limitata
-              </button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <CalendlyWidget
+                  url="https://calendly.com/mathilde-sartoria/consulenza-collezione"
+                  text="Prenota visita in atelier"
+                  className="bg-green-primary text-cream px-8 py-3 rounded-full font-medium hover:bg-green-hover transition-all transform hover:scale-105 w-full sm:w-auto"
+                  prefill={{
+                    customAnswers: {
+                      a1: "Capsule Collection"
+                    }
+                  }}
+                />
+                <button
+                  onClick={onCollezioneClick}
+                  className="border-2 border-green-primary text-green-primary px-8 py-3 rounded-full font-medium hover:bg-green-primary hover:text-cream transition-all w-full sm:w-auto"
+                  data-testid="button-scopri-collezione"
+                >
+                  Scopri la collezione limitata
+                </button>
+              </div>
             </div>
           </ScrollReveal>
         </div>
