@@ -53,7 +53,6 @@ export default function Home() {
   };
 
   const handleCollezioneClick = () => {
-    requestConsultation.mutate('collezione');
     scrollToSection('collezioni');
   };
 
