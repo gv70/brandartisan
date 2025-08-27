@@ -2,7 +2,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function RegalaUnicitaSection() {
   return (
-    <section className="py-16 sm:py-20 lg:section-spacing px-4 sm:px-6 lg:container-spacing bg-gradient-to-br from-warm-beige to-cream">
+    <section id="regala-unicita" className="py-16 sm:py-20 lg:section-spacing px-4 sm:px-6 lg:container-spacing bg-gradient-to-br from-warm-beige to-cream">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           <ScrollReveal delay={200}>

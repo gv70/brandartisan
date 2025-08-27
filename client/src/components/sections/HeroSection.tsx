@@ -51,7 +51,13 @@ export default function HeroSection({ onCollezioneClick, onSuMisuraClick }: Hero
               Prenota la tua sartoria su misura
             </button>
             <button 
-              onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}
+              onClick={() => {
+                const element = document.getElementById('regala-unicita');
+                if (element) {
+                  const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
+                  window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                }
+              }}
               className="bg-leather-brown text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105 shadow-xl w-full sm:w-auto"
               data-testid="button-regala-unicita"
             >
