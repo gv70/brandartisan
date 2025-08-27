@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { useToast } from "@/hooks/use-toast";
 import {
   Dialog,
   DialogContent,
@@ -27,8 +26,6 @@ export default function RegalaUnicitaDialog({ children }: RegalaUnicitaDialogPro
     messaggio: "",
     importo: ""
   });
-  const { toast } = useToast();
-
   const sendGiftRequest = useMutation({
     mutationFn: async (data: typeof formData) => {
       // Simula invio email - in produzione integreresti con un servizio di email
@@ -57,10 +54,6 @@ ${data.messaggio}
       return { success: true };
     },
     onSuccess: () => {
-      toast({
-        title: "Richiesta inviata!",
-        description: "Ti contatteremo presto per finalizzare il tuo buono regalo.",
-      });
       setOpen(false);
       setFormData({
         nome: "",
@@ -72,22 +65,13 @@ ${data.messaggio}
       });
     },
     onError: () => {
-      toast({
-        variant: "destructive",
-        title: "Errore nell'invio",
-        description: "Si è verificato un errore. Riprova più tardi.",
-      });
+      // Gestione errore silenziosa
     },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.nome || !formData.email || !formData.nomeDestinatario) {
-      toast({
-        variant: "destructive",
-        title: "Campi obbligatori",
-        description: "Compila tutti i campi obbligatori per continuare.",
-      });
       return;
     }
     sendGiftRequest.mutate(formData);
