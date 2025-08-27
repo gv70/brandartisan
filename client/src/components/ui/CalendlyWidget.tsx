@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { X } from "lucide-react";
 
 interface CalendlyWidgetProps {
   url: string;
@@ -20,6 +22,7 @@ export default function CalendlyWidget({
   className = "",
   prefill = {} 
 }: CalendlyWidgetProps) {
+  const [isOpen, setIsOpen] = useState(false);
   
   useEffect(() => {
     // Carica script Calendly se non è già presente
@@ -31,28 +34,50 @@ export default function CalendlyWidget({
     }
   }, []);
 
-  const openCalendly = () => {
-    // @ts-ignore - Calendly viene caricato dinamicamente
-    if (window.Calendly) {
-      // @ts-ignore
-      window.Calendly.initPopupWidget({
-        url: url,
-        prefill: prefill
-      });
-    } else {
-      // Fallback: apri in una nuova finestra
-      window.open(url, '_blank', 'width=320,height=630');
+  useEffect(() => {
+    // Inizializza il widget inline quando il modal si apre
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        // @ts-ignore - Calendly viene caricato dinamicamente
+        if (window.Calendly && document.querySelector('.calendly-inline-widget-modal')) {
+          // @ts-ignore
+          window.Calendly.initInlineWidget({
+            url: url,
+            parentElement: document.querySelector('.calendly-inline-widget-modal'),
+            prefill: prefill
+          });
+        }
+      }, 100);
+      
+      return () => clearTimeout(timer);
     }
-  };
+  }, [isOpen, url, prefill]);
 
   return (
-    <button 
-      onClick={openCalendly}
-      className={className}
-      data-testid="button-calendly"
-    >
-      {text}
-    </button>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <button 
+          className={className}
+          data-testid="button-calendly"
+        >
+          {text}
+        </button>
+      </DialogTrigger>
+      <DialogContent className="max-w-4xl w-full max-h-[90vh] p-0">
+        <DialogHeader className="p-6 pb-0">
+          <DialogTitle className="text-xl font-semibold">
+            Prenota il tuo appuntamento
+          </DialogTitle>
+        </DialogHeader>
+        <div className="p-6 pt-2">
+          <div 
+            className="calendly-inline-widget-modal w-full"
+            style={{ minWidth: '320px', height: '600px' }}
+            data-testid="calendly-modal-widget"
+          />
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 
