@@ -11,10 +11,10 @@ export default function CollezioniSection({ onCollezioneClick }: CollezioniSecti
         <div className="text-center mb-16">
           <ScrollReveal>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-text-primary mb-6" data-testid="text-collezioni-title">
-              Collezioni capsule
+              Capsule Collection: eleganza essenziale, in edizione limitata
             </h2>
             <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto" data-testid="text-collezioni-subtitle">
-              Creazioni limitate che interpretano l'eleganza contemporanea attraverso la maestria artigianale italiana.
+              Collezioni in edizione limitata, che interpretano l'eleganza contemporanea attraverso la maestria artigianale italiana. Creazioni pensate per ogni stagione, con la stessa cura e unicità del su misura.
             </p>
           </ScrollReveal>
         </div>

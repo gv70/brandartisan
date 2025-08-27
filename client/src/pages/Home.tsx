@@ -8,6 +8,7 @@ import ChiSiamoSection from "@/components/sections/ChiSiamoSection";
 import SuMisuraSection from "@/components/sections/SuMisuraSection";
 import CollezioniSection from "@/components/sections/CollezioniSection";
 import ValoriSection from "@/components/sections/ValoriSection";
+import RegalaUnicitaSection from "@/components/sections/RegalaUnicitaSection";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 import Footer from "@/components/Footer";
 
@@ -78,6 +79,8 @@ export default function Home() {
         <CollezioniSection onCollezioneClick={handleCollezioneClick} />
         
         <ValoriSection />
+        
+        <RegalaUnicitaSection />
         
         <NewsletterSection />
       </main>

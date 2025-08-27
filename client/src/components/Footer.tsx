@@ -7,8 +7,11 @@ export default function Footer() {
             <div className="font-brand text-3xl font-semibold mb-6" data-testid="text-footer-brand">
               Mathilde
             </div>
-            <p className="text-cream/80 leading-relaxed mb-6" data-testid="text-footer-description">
+            <p className="text-cream/80 leading-relaxed mb-4" data-testid="text-footer-description">
               Sartoria artigianale contemporanea che unisce tradizione italiana e visione internazionale per creare capi unici e sostenibili.
+            </p>
+            <p className="text-cream/80 leading-relaxed mb-6" data-testid="text-footer-contact-note">
+              Ricevo su appuntamento. Scrivimi, sarò felice di creare con te.
             </p>
             <div className="flex space-x-4">
               <a 

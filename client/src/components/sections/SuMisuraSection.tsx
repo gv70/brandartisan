@@ -9,13 +9,13 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
   const steps = [
     {
       title: "Consulenza",
-      description: "Ti accogliamo nel nostro atelier per comprendere il tuo stile, le tue necessità e i tuoi sogni sartoriali.",
+      description: "Un primo incontro, in atelier o a distanza, per comprendere insieme il tuo stile, i tuoi desideri e trasformarli in un capo unico.",
       image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
       alt: "Tailor consultation and fabric selection"
     },
     {
       title: "Creazione",
-      description: "Le nostre mani esperte danno forma ai tuoi desideri, utilizzando tecniche tramandate da generazioni.",
+      description: "I tuoi desideri prendono forma grazie a tecniche sartoriali che attraversano generazioni.",
       image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
       alt: "Artisan hands taking precise measurements"
     },
@@ -33,7 +33,7 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
         <div className="text-center mb-16">
           <ScrollReveal>
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-text-primary mb-6" data-testid="text-su-misura-title">
-              Servizio su misura
+              Sartoria su misura: dal tessuto al tuo sogno
             </h2>
             <p className="text-lg sm:text-xl text-text-secondary max-w-3xl mx-auto" data-testid="text-su-misura-subtitle">
               Un'esperienza esclusiva che inizia con l'ascolto dei tuoi desideri e si conclude con un capo che diventa parte della tua identità.
