@@ -34,7 +34,7 @@ export default function HeroSection({ onCollezioneClick, onSuMisuraClick }: Hero
               <span className="italic">La prossima è la tua?</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-xl lg:text-2xl text-cream mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed" data-testid="hero-subtitle">
-              Creazioni sartoriali per donne e bambini, con accessori che ti raccontano. Realizzate a mano su misura, per uno stile senza tempo.
+              Creazioni sartoriali e accessori che ti raccontano. Realizzate a mano su misura, per uno stile senza tempo.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
