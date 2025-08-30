@@ -36,7 +36,10 @@ export default function Navigation() {
             <img 
               src={logoImage} 
               alt="Mathilde Studio" 
-              className="h-[130px] w-auto object-contain"
+              className={cn(
+                "h-[130px] w-auto object-contain transition-all duration-300",
+                isScrolled ? "brightness-0" : "brightness-100"
+              )}
             />
           </div>
           <div className="hidden md:flex space-x-8 text-sm font-medium">
