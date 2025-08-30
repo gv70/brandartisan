@@ -14,7 +14,7 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
   const steps = [
     {
       title: "Consulenza",
-      description: "Un primo incontro, in atelier o a distanza, per comprendere insieme il tuo stile, i tuoi desideri e trasformarli in un capo unico.",
+      description: "Un primo incontro, in laboratorio o a distanza, per comprendere insieme il tuo stile, i tuoi desideri e trasformarli in un capo unico.",
       image: consultazioneImage,
       alt: "Bacheca creativa con disegni di moda e campioni di tessuti"
     },

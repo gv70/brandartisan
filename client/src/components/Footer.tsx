@@ -73,7 +73,7 @@ export default function Footer() {
               className="font-semibold mb-4"
               data-testid="text-footer-hours-title"
             >
-              Orari atelier
+              Orari laboratorio
             </h4>
             <div className="space-y-1 sm:space-y-2 text-cream/80 text-sm sm:text-base">
               <p data-testid="text-hours-weekdays">

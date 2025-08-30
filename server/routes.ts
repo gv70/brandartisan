@@ -12,7 +12,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertNewsletterSubscriptionSchema.parse(req.body);
       const subscription = await storage.createNewsletterSubscription(validatedData);
       
-      // Invia email di notifica all'atelier
+      // Invia email di notifica al laboratorio
       await sendNewsletterSubscriptionEmail(validatedData);
       
       res.json({ success: true, subscription });

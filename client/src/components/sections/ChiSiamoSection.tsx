@@ -15,7 +15,7 @@ export default function ChiSiamoSection() {
               alt="Mathilde Studio - La storia dietro le mani"
               className="rounded-xl shadow-lg w-full h-auto object-cover object-center transform rotate-0"
               style={{ aspectRatio: '3/4' }}
-              data-testid="img-atelier"
+              data-testid="img-laboratorio"
             />
           </ScrollReveal>
           <ScrollReveal delay={400}>

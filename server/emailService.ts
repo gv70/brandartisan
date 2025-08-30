@@ -57,7 +57,7 @@ export async function sendGiftRequestEmail(giftData: InsertGiftRequest) {
     
     await transporter.sendMail({
       from: process.env.OUTLOOK_EMAIL || 'info@mathildestudio.it',
-      to: 'info@mathildestudio.it', // Email di destinazione dell'atelier
+      to: 'info@mathildestudio.it', // Email di destinazione del laboratorio
       subject: `🎁 Nuova Richiesta Buono Regalo da ${giftData.nome}`,
       html: htmlContent,
       text: `

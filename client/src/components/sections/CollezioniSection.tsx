@@ -94,7 +94,7 @@ export default function CollezioniSection({
               <div className="flex flex-col sm:flex-row gap-4">
                 <CalendlyWidget
                   url="https://calendly.com/mathildestudio-info/30min"
-                  text="Prenota visita in atelier"
+                  text="Prenota visita in laboratorio"
                   className="bg-green-primary text-cream px-8 py-3 rounded-full font-medium hover:bg-green-hover transition-all transform hover:scale-105 w-full sm:w-auto"
                   prefill={{
                     customAnswers: {
