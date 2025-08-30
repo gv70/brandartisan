@@ -2,6 +2,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import CalendlyWidget from "@/components/ui/CalendlyWidget";
 import consultazioneImage from "@assets/primo_1756560631344.png";
+import creazioneImage from "@assets/capsule collaction autum 2025_1756561031710.jpg";
 
 interface SuMisuraSectionProps {
   onBookingClick: () => void;
@@ -18,8 +19,8 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
     {
       title: "Creazione",
       description: "I tuoi desideri prendono forma grazie a tecniche sartoriali che attraversano generazioni.",
-      image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-      alt: "Artisan hands taking precise measurements"
+      image: creazioneImage,
+      alt: "Cartamodelli e strumenti sartoriali per la creazione"
     },
     {
       title: "Perfezione",
