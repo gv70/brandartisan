@@ -6,14 +6,6 @@ export default function RegalaUnicitaSection() {
     <section id="regala-unicita" className="py-16 sm:py-20 lg:section-spacing px-4 sm:px-6 lg:container-spacing bg-gradient-to-br from-warm-beige to-cream">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-          <ScrollReveal delay={200}>
-            <img
-              src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-              alt="Elegant gift wrapping with luxury details"
-              className="rounded-xl shadow-lg w-full h-auto"
-              data-testid="img-gift"
-            />
-          </ScrollReveal>
           <ScrollReveal delay={400}>
             <div>
               <h2
@@ -48,6 +40,14 @@ export default function RegalaUnicitaSection() {
                 </button>
               </RegalaUnicitaDialog>
             </div>
+          </ScrollReveal>
+          <ScrollReveal delay={200}>
+            <img
+              src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+              alt="Elegant gift wrapping with luxury details"
+              className="rounded-xl shadow-lg w-full h-auto"
+              data-testid="img-gift"
+            />
           </ScrollReveal>
         </div>
       </div>
