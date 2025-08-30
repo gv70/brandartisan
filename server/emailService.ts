@@ -8,12 +8,16 @@ const createTransporter = () => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.OUTLOOK_EMAIL || 'info@mathilde.it',
+      user: process.env.OUTLOOK_EMAIL || 'info@mathildestudio.it',
       pass: process.env.OUTLOOK_PASSWORD || 'your-password'
     },
     tls: {
-      ciphers: 'SSLv3'
-    }
+      ciphers: 'SSLv3',
+      rejectUnauthorized: false
+    },
+    // Configurazione aggiuntiva per Microsoft 365
+    requireTLS: true,
+    connectionTimeout: 60000
   });
 };
 
