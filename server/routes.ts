@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertNewsletterSubscriptionSchema, insertConsultationRequestSchema, insertGiftRequestSchema } from "@shared/schema";
-import { sendGiftRequestEmail } from "./emailService";
+import { sendGiftRequestEmail, sendNewsletterSubscriptionEmail } from "./emailService";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -11,6 +11,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertNewsletterSubscriptionSchema.parse(req.body);
       const subscription = await storage.createNewsletterSubscription(validatedData);
+      
+      // Invia email di notifica all'atelier
+      await sendNewsletterSubscriptionEmail(validatedData);
+      
       res.json({ success: true, subscription });
     } catch (error) {
       if (error instanceof z.ZodError) {

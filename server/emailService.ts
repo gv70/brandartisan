@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import type { InsertGiftRequest } from '@shared/schema';
+import type { InsertGiftRequest, InsertNewsletterSubscription } from '@shared/schema';
 
 // Configurazione email con Microsoft 365 Essential
 const createTransporter = () => {
@@ -56,8 +56,8 @@ export async function sendGiftRequestEmail(giftData: InsertGiftRequest) {
     `;
     
     await transporter.sendMail({
-      from: process.env.OUTLOOK_EMAIL || 'info@mathilde.it',
-      to: process.env.OUTLOOK_EMAIL || 'info@mathilde.it', // Email di destinazione dell'atelier
+      from: process.env.OUTLOOK_EMAIL || 'info@mathildestudio.it',
+      to: 'info@mathildestudio.it', // Email di destinazione dell'atelier
       subject: `🎁 Nuova Richiesta Buono Regalo da ${giftData.nome}`,
       html: htmlContent,
       text: `
@@ -95,10 +95,55 @@ ${giftData.messaggio ? `Messaggio: ${giftData.messaggio}` : ''}
     return { 
       success: false, 
       fallbackEmail: {
-        to: 'info@mathilde.it',
+        to: 'info@mathildestudio.it',
         subject: `Richiesta Buono Regalo da ${giftData.nome}`,
         body: emailBody
       }
     };
+  }
+}
+
+export async function sendNewsletterSubscriptionEmail(subscriptionData: InsertNewsletterSubscription) {
+  try {
+    const transporter = createTransporter();
+    
+    const htmlContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #0b3d2e; font-family: 'Playfair Display', serif;">
+          Nuova Iscrizione Newsletter - Mathilde
+        </h2>
+        
+        <div style="background: #f8f6f4; padding: 20px; border-radius: 10px; margin: 20px 0;">
+          <h3 style="color: #0b3d2e; margin-top: 0;">Nuovo Iscritto</h3>
+          <p><strong>Email:</strong> ${subscriptionData.email}</p>
+        </div>
+        
+        <div style="background: #0b3d2e; color: white; padding: 20px; border-radius: 10px; text-align: center;">
+          <p style="margin: 0;">Iscrizione ricevuta il ${new Date().toLocaleDateString('it-IT')}</p>
+          <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.8;">
+            Un nuovo cliente si è iscritto alla newsletter Mathilde
+          </p>
+        </div>
+      </div>
+    `;
+    
+    await transporter.sendMail({
+      from: process.env.OUTLOOK_EMAIL || 'info@mathildestudio.it',
+      to: 'info@mathildestudio.it',
+      subject: `📧 Nuova iscrizione newsletter: ${subscriptionData.email}`,
+      html: htmlContent,
+      text: `
+        Nuova Iscrizione Newsletter - Mathilde
+        
+        Email: ${subscriptionData.email}
+        
+        Ricevuta il ${new Date().toLocaleDateString('it-IT')}
+      `
+    });
+    
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending newsletter subscription email:', error);
+    return { success: false };
   }
 }
