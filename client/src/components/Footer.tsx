@@ -87,6 +87,19 @@ export default function Footer() {
           <p data-testid="text-copyright">
             &copy; 2025 Mathilde Studio. Tutti i diritti riservati.
           </p>
+          <div className="mt-4 space-x-4 text-sm">
+            <a href="/privacy-policy" className="hover:text-cream transition-colors">
+              Privacy Policy
+            </a>
+            <span>•</span>
+            <a href="/cookie-policy" className="hover:text-cream transition-colors">
+              Cookie Policy
+            </a>
+            <span>•</span>
+            <a href="/terms" className="hover:text-cream transition-colors">
+              Termini di Servizio
+            </a>
+          </div>
         </div>
       </div>
     </footer>

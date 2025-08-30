@@ -3,9 +3,11 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");
+  const [privacyConsent, setPrivacyConsent] = useState(false);
   const { toast } = useToast();
 
   const subscribeToNewsletter = useMutation({
@@ -19,6 +21,7 @@ export default function NewsletterSection() {
         description: "Ti invieremo le nostre ultime creazioni e novità esclusive.",
       });
       setEmail("");
+      setPrivacyConsent(false);
     },
     onError: (error: any) => {
       const message = error.message.includes("409") 
@@ -36,6 +39,15 @@ export default function NewsletterSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
+    
+    if (!privacyConsent) {
+      toast({
+        title: "Consenso privacy richiesto",
+        description: "È necessario accettare l'informativa privacy per iscriversi alla newsletter.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     subscribeToNewsletter.mutate(email);
   };
@@ -72,9 +84,23 @@ export default function NewsletterSection() {
                   {subscribeToNewsletter.isPending ? "Iscrizione..." : "Iscriviti"}
                 </button>
               </div>
-              <p className="text-cream text-sm mt-4" data-testid="text-privacy-notice">
-                Non condivideremo mai la tua email. Potrai disiscriverti in qualsiasi momento.
-              </p>
+              
+              <div className="flex items-start space-x-2 mt-6 text-left">
+                <Checkbox 
+                  id="newsletter-privacy-consent"
+                  checked={privacyConsent}
+                  onCheckedChange={(checked) => setPrivacyConsent(!!checked)}
+                  className="mt-1 border-cream data-[state=checked]:bg-leather-brown"
+                  data-testid="checkbox-newsletter-privacy"
+                />
+                <label htmlFor="newsletter-privacy-consent" className="text-cream text-sm leading-relaxed">
+                  Acconsento al trattamento dei miei dati personali secondo l'
+                  <a href="/privacy-policy" target="_blank" className="text-sand hover:underline">
+                    informativa privacy
+                  </a>
+                  . Potrai disiscriverti in qualsiasi momento.
+                </label>
+              </div>
             </form>
           </div>
         </ScrollReveal>

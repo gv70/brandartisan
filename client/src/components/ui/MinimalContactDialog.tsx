@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -18,6 +19,7 @@ interface ContactFormData {
   name: string;
   email: string;
   message?: string;
+  privacyConsent: boolean;
 }
 
 export default function MinimalContactDialog({ 
@@ -30,7 +32,8 @@ export default function MinimalContactDialog({
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
-    message: ""
+    message: "",
+    privacyConsent: false
   });
   
   const { toast } = useToast();
@@ -65,7 +68,7 @@ export default function MinimalContactDialog({
           ? "Ti contatteremo presto per la tua gift card."
           : "Ti risponderemo il prima possibile.",
       });
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ name: "", email: "", message: "", privacyConsent: false });
       setOpen(false);
       queryClient.invalidateQueries({ queryKey: ['/api/consultation'] });
     },
@@ -84,6 +87,14 @@ export default function MinimalContactDialog({
       toast({
         title: "Campi obbligatori",
         description: "Nome ed email sono richiesti.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!formData.privacyConsent) {
+      toast({
+        title: "Consenso privacy richiesto",
+        description: "È necessario accettare l'informativa privacy per continuare.",
         variant: "destructive",
       });
       return;
@@ -137,6 +148,22 @@ export default function MinimalContactDialog({
               className="bg-white border-sand focus:border-leather-brown min-h-[80px] resize-none"
               data-testid="textarea-contact-message"
             />
+          </div>
+
+          <div className="flex items-start space-x-2">
+            <Checkbox 
+              id="privacy-consent"
+              checked={formData.privacyConsent}
+              onCheckedChange={(checked) => setFormData(prev => ({ ...prev, privacyConsent: !!checked }))}
+              data-testid="checkbox-privacy-consent"
+            />
+            <label htmlFor="privacy-consent" className="text-sm text-text-secondary leading-relaxed">
+              Acconsento al trattamento dei miei dati personali secondo l'
+              <a href="/privacy-policy" target="_blank" className="text-leather-brown hover:underline">
+                informativa privacy
+              </a>
+              . I dati saranno utilizzati esclusivamente per rispondere alla tua richiesta.
+            </label>
           </div>
 
           <div className="flex gap-3 pt-2">
