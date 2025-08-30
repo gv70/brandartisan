@@ -74,7 +74,7 @@ export default function CollezioniSection({
                   data-testid="text-feature-1"
                 >
                   <div className="w-2 h-2 bg-leather-brown rounded-full mr-3"></div>
-                  <span>15 pezzi unici realizzati a mano</span>
+                  <span>Pezzi unici realizzati a mano</span>
                 </div>
                 <div
                   className="flex items-center text-text-secondary"
