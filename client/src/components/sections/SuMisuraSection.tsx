@@ -1,6 +1,7 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import CalendlyWidget from "@/components/ui/CalendlyWidget";
+import MinimalContactDialog from "@/components/ui/MinimalContactDialog";
 import consultazioneImage from "@assets/primo_1756560631344.png";
 import creazioneImage from "@assets/capsule collaction autum 2025_1756561031710.jpg";
 import perfezioneImage from "@assets/ChatGPT Image 30 ago 2025, 16_05_08_1756562724840.png";
@@ -79,13 +80,14 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
                   }
                 }}
               />
-              <button 
-                onClick={onBookingClick}
-                className="border-2 border-leather-brown text-leather-brown px-10 py-4 rounded-full text-lg font-medium hover:bg-leather-brown hover:text-cream transition-all w-full sm:w-auto"
-                data-testid="button-info-su-misura"
-              >
-                Richiedi informazioni
-              </button>
+              <MinimalContactDialog type="info" title="Richiedi Informazioni">
+                <button 
+                  className="border-2 border-leather-brown text-leather-brown px-10 py-4 rounded-full text-lg font-medium hover:bg-leather-brown hover:text-cream transition-all w-full sm:w-auto"
+                  data-testid="button-info-su-misura"
+                >
+                  Richiedi informazioni
+                </button>
+              </MinimalContactDialog>
             </div>
           </ScrollReveal>
         </div>

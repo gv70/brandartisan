@@ -1,5 +1,5 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import RegalaUnicitaDialog from "@/components/ui/RegalaUnicitaDialog";
+import MinimalContactDialog from "@/components/ui/MinimalContactDialog";
 import giftCardImage from "@assets/capsule collaction autum 2025 (1)_1756561707340.jpg";
 
 export default function RegalaUnicitaSection() {
@@ -32,14 +32,14 @@ export default function RegalaUnicitaSection() {
                   <span>Confezione regalo elegante inclusa</span>
                 </div>
               </div>
-              <RegalaUnicitaDialog>
+              <MinimalContactDialog type="gift" title="Richiedi Gift Card">
                 <button 
                   className="bg-green-primary text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-green-hover transition-all transform hover:scale-105 shadow-xl w-full sm:w-auto"
                   data-testid="button-regala-unicita-contact"
                 >
                   Regala unicità
                 </button>
-              </RegalaUnicitaDialog>
+              </MinimalContactDialog>
             </div>
           </ScrollReveal>
           <ScrollReveal delay={200}>
