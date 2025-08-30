@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import logoImage from "@assets/Senza titolo (19)_1756559098695.png";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,8 +32,12 @@ export default function Navigation() {
     )}>
       <div className="max-w-7xl mx-auto container-spacing py-4">
         <div className="flex justify-between items-center">
-          <div className="font-brand text-2xl font-semibold text-text-primary" data-testid="logo">
-            Mathilde
+          <div className="flex items-center" data-testid="logo">
+            <img 
+              src={logoImage} 
+              alt="Mathilde Studio" 
+              className="h-10 w-auto object-contain"
+            />
           </div>
           <div className="hidden md:flex space-x-8 text-sm font-medium">
             <button
