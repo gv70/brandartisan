@@ -129,17 +129,15 @@ export default function MinimalContactDialog({
             />
           </div>
 
-          {type === "info" && (
-            <div>
-              <Textarea
-                placeholder="Messaggio (opzionale)"
-                value={formData.message}
-                onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
-                className="bg-white border-sand focus:border-leather-brown min-h-[80px] resize-none"
-                data-testid="textarea-contact-message"
-              />
-            </div>
-          )}
+          <div>
+            <Textarea
+              placeholder={type === "gift" ? "Richiesta speciale (opzionale)" : "Messaggio (opzionale)"}
+              value={formData.message}
+              onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+              className="bg-white border-sand focus:border-leather-brown min-h-[80px] resize-none"
+              data-testid="textarea-contact-message"
+            />
+          </div>
 
           <div className="flex gap-3 pt-2">
             <Button
