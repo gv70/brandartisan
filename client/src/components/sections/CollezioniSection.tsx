@@ -43,7 +43,8 @@ export default function CollezioniSection({
                   <img
                     src={capsuleImage}
                     alt="Mathilde Capsule Collection Autumn 2025 - Coming Soon"
-                    className="rounded-xl w-full h-48 sm:h-64 lg:h-80 object-cover object-bottom"
+                    className="rounded-xl w-full h-48 sm:h-64 lg:h-80 object-cover"
+                    style={{ objectPosition: "center 70%" }}
                     data-testid="img-capsule-collection"
                   />
                 </div>
