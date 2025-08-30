@@ -3,6 +3,7 @@ import SpotlightCard from "@/components/ui/SpotlightCard";
 import CalendlyWidget from "@/components/ui/CalendlyWidget";
 import consultazioneImage from "@assets/primo_1756560631344.png";
 import creazioneImage from "@assets/capsule collaction autum 2025_1756561031710.jpg";
+import perfezioneImage from "@assets/ChatGPT Image 30 ago 2025, 16_05_08_1756562724840.png";
 
 interface SuMisuraSectionProps {
   onBookingClick: () => void;
@@ -25,8 +26,8 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
     {
       title: "Perfezione",
       description: "Ritocchi finali e prove fino al raggiungimento della vestibilità perfetta, unica per te.",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-      alt: "Elegant fitting room with luxury details"
+      image: perfezioneImage,
+      alt: "Personalizzazione sartoriale con dettagli scritti a mano"
     }
   ];
 
