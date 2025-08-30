@@ -45,7 +45,7 @@ export default function HeroSection({ onCollezioneClick, onSuMisuraClick }: Hero
               Scopri la Capsule Collection
             </button>
             <CalendlyWidget
-              url="https://calendly.com/mathilde-sartoria/prima-consulenza"
+              url="https://calendly.com/mathildestudio-info/30min"
               text="Prenota consulenza gratuita"
               className="bg-cream/20 border-2 border-cream text-cream px-8 py-4 rounded-full text-lg font-medium hover:bg-cream hover:text-green-primary transition-all shadow-xl backdrop-blur-md w-full sm:w-auto"
               prefill={{

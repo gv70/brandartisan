@@ -67,7 +67,7 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
           <ScrollReveal delay={600}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <CalendlyWidget
-                url="https://calendly.com/mathilde-sartoria/consulenza-su-misura"
+                url="https://calendly.com/mathildestudio-info/30min"
                 text="Prenota consulenza"
                 className="bg-leather-brown text-cream px-10 py-4 rounded-full text-lg font-medium hover:bg-leather-hover transition-all transform hover:scale-105 w-full sm:w-auto"
                 prefill={{
