@@ -28,28 +28,12 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://instagram.com/mathilde"
+                href="https://instagram.com/m.bymathilde"
                 className="w-10 h-10 bg-cream/10 rounded-full flex items-center justify-center hover:bg-cream/20 transition-colors"
                 data-testid="link-instagram"
                 aria-label="Instagram"
               >
                 <span className="text-sm font-semibold">IG</span>
-              </a>
-              <a
-                href="https://facebook.com/mathilde"
-                className="w-10 h-10 bg-cream/10 rounded-full flex items-center justify-center hover:bg-cream/20 transition-colors"
-                data-testid="link-facebook"
-                aria-label="Facebook"
-              >
-                <span className="text-sm font-semibold">FB</span>
-              </a>
-              <a
-                href="https://linkedin.com/company/mathilde"
-                className="w-10 h-10 bg-cream/10 rounded-full flex items-center justify-center hover:bg-cream/20 transition-colors"
-                data-testid="link-linkedin"
-                aria-label="LinkedIn"
-              >
-                <span className="text-sm font-semibold">LI</span>
               </a>
             </div>
           </div>
