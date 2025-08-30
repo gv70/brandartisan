@@ -1,6 +1,7 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import SpotlightCard from "@/components/ui/SpotlightCard";
 import CalendlyWidget from "@/components/ui/CalendlyWidget";
+import consultazioneImage from "@assets/primo_1756560631344.png";
 
 interface SuMisuraSectionProps {
   onBookingClick: () => void;
@@ -11,8 +12,8 @@ export default function SuMisuraSection({ onBookingClick }: SuMisuraSectionProps
     {
       title: "Consulenza",
       description: "Un primo incontro, in atelier o a distanza, per comprendere insieme il tuo stile, i tuoi desideri e trasformarli in un capo unico.",
-      image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-      alt: "Tailor consultation and fabric selection"
+      image: consultazioneImage,
+      alt: "Bacheca creativa con disegni di moda e campioni di tessuti"
     },
     {
       title: "Creazione",
