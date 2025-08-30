@@ -30,7 +30,8 @@ export default function HeroSection({ onCollezioneClick, onSuMisuraClick }: Hero
           {/* Text container with semi-transparent background */}
           <div className="bg-text-primary/30 backdrop-blur-sm rounded-2xl p-6 sm:p-8 lg:p-10 mb-6 sm:mb-8">
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-cream mb-4 sm:mb-6 leading-tight" data-testid="hero-title">
-              Ogni capo una storia. La prossima è la tua.
+              Ogni capo una storia.<br/>
+              <span className="italic">La prossima è la tua?</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-xl lg:text-2xl text-cream mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed" data-testid="hero-subtitle">
               Creazioni sartoriali per donne e bambini, con accessori che ti raccontano. Realizzate a mano su misura, per uno stile senza tempo.
