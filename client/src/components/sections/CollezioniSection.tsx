@@ -1,5 +1,6 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import CalendlyWidget from "@/components/ui/CalendlyWidget";
+import capsuleImage from "@assets/capsule collaction autum 2025_1756560799608.png";
 
 interface CollezioniSectionProps {
   onCollezioneClick: () => void;
@@ -38,20 +39,12 @@ export default function CollezioniSection({
           <ScrollReveal delay={200}>
             <div className="collection-stack">
               <div className="relative">
-                <div className="collection-item absolute inset-0 rounded-xl shadow-lg transform -rotate-2">
+                <div className="collection-item relative rounded-xl shadow-lg">
                   <img
-                    src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
-                    alt="High-end fabric details with texture and craftsmanship"
+                    src={capsuleImage}
+                    alt="Mathilde Capsule Collection Autumn 2025 - Coming Soon"
                     className="rounded-xl w-full h-48 sm:h-64 lg:h-80 object-cover"
-                    data-testid="img-fabric-1"
-                  />
-                </div>
-                <div className="collection-item relative rounded-xl shadow-lg transform rotate-1">
-                  <img
-                    src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
-                    alt="Italian craftsmanship details showing texture and quality"
-                    className="rounded-xl w-full h-48 sm:h-64 lg:h-80 object-cover"
-                    data-testid="img-fabric-2"
+                    data-testid="img-capsule-collection"
                   />
                 </div>
               </div>
