@@ -42,17 +42,35 @@ export default function MinimalContactDialog({
   const submitMutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
       const endpoint = type === "gift" ? "/api/gift/request" : "/api/consultation/request";
+      
+      let requestBody;
+      if (type === "gift") {
+        // Formato per gift card
+        requestBody = {
+          nome: data.name,
+          email: data.email,
+          nomeDestinatario: data.name, // Per ora uguale al richiedente
+          messaggio: data.message || "Richiesta gift card",
+          telefono: "", // Campo opzionale
+          importo: "" // Campo opzionale
+        };
+      } else {
+        // Formato per consultazione
+        requestBody = {
+          name: data.name,
+          email: data.email,
+          message: data.message || "Richiesta informazioni",
+          service: "su-misura", // Tipo di servizio
+          phone: "" // Campo opzionale
+        };
+      }
+      
       const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          message: data.message || (type === "gift" ? "Richiesta gift card" : "Richiesta informazioni"),
-          serviceType: type === "gift" ? "Gift Card" : "Informazioni Generali"
-        })
+        body: JSON.stringify(requestBody)
       });
       
       if (!response.ok) {
