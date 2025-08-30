@@ -36,7 +36,7 @@ export default function Navigation() {
             <img 
               src={logoImage} 
               alt="Mathilde Studio" 
-              className="h-16 w-auto object-contain"
+              className="h-[200px] w-auto object-contain"
             />
           </div>
           <div className="hidden md:flex space-x-8 text-sm font-medium">
