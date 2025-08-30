@@ -35,15 +35,18 @@ export default function Navigation() {
       "fixed top-0 w-full z-50 transition-all duration-300",
       isScrolled ? "bg-cream border-b border-subtle/20" : "bg-transparent"
     )}>
-      <div className="max-w-7xl mx-auto container-spacing py-4">
+      <div className={cn(
+        "max-w-7xl mx-auto container-spacing transition-all duration-300",
+        isScrolled ? "py-2" : "py-4"
+      )}>
         <div className="flex justify-between items-center">
           <div className="flex items-center" data-testid="logo">
             <img 
               src={logoImage} 
               alt="Mathilde Studio" 
               className={cn(
-                "h-[130px] w-auto object-contain transition-all duration-300",
-                isScrolled ? "brightness-0" : "brightness-100"
+                "w-auto object-contain transition-all duration-300",
+                isScrolled ? "h-[80px] brightness-0" : "h-[130px] brightness-100"
               )}
             />
           </div>
