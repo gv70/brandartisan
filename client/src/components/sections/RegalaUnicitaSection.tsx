@@ -1,5 +1,6 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import RegalaUnicitaDialog from "@/components/ui/RegalaUnicitaDialog";
+import giftCardImage from "@assets/capsule collaction autum 2025 (1)_1756561707340.jpg";
 
 export default function RegalaUnicitaSection() {
   return (
@@ -43,8 +44,8 @@ export default function RegalaUnicitaSection() {
           </ScrollReveal>
           <ScrollReveal delay={200}>
             <img
-              src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-              alt="Elegant gift wrapping with luxury details"
+              src={giftCardImage}
+              alt="Gift card Mathilde - Ogni capo una storia"
               className="rounded-xl shadow-lg w-full h-auto"
               data-testid="img-gift"
             />
