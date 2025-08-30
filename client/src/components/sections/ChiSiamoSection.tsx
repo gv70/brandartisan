@@ -10,7 +10,7 @@ export default function ChiSiamoSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           <ScrollReveal delay={200}>
             <img
-              src="/attached_assets/IMG_6269_1756559527220.HEIC"
+              src="/attached_assets/IMG_1945_1756559646527.jpg"
               alt="Mathilde Studio - La storia dietro le mani"
               className="rounded-xl shadow-lg w-full h-auto object-cover object-center transform rotate-0"
               style={{ aspectRatio: '3/4' }}
