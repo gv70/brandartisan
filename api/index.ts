@@ -340,12 +340,14 @@ async function registerRoutes(app: Express): Promise<Server> {
 
 // Serve static files
 function serveStatic(app: Express) {
-  // On Vercel, we need to serve static files from the function
-  // Try to find the static files directory
+  // On Vercel, static files should be served by Vercel itself via outputDirectory
+  // But we need to handle the SPA routing fallback for non-API routes
+  // Try to find the static files directory in various locations
   const possibleBasePaths = [
     process.cwd(),
     "/var/task",
     path.resolve(process.cwd(), ".."),
+    path.resolve(process.cwd(), "..", ".."),
   ];
   
   let staticBasePath: string | null = null;
@@ -353,23 +355,31 @@ function serveStatic(app: Express) {
     const testPath = path.resolve(basePath, "dist", "public");
     if (fs.existsSync(testPath) && fs.existsSync(path.resolve(testPath, "index.html"))) {
       staticBasePath = testPath;
+      console.log(`Found static files at: ${staticBasePath}`);
       break;
     }
   }
   
   if (staticBasePath) {
-    console.log(`Serving static files from: ${staticBasePath}`);
-    // Serve static files
+    // Serve static files with proper caching
     app.use(express.static(staticBasePath, {
       maxAge: '1y',
       etag: true,
+      immutable: true,
     }));
     
-    // Fallback to index.html for SPA routing
+    // Fallback to index.html for SPA routing (only for non-API, non-file requests)
     app.use("*", (req, res) => {
       if (req.path.startsWith("/api")) {
         return res.status(404).json({ error: "Not found" });
       }
+      
+      // Check if it's a file request (has extension)
+      if (req.path.match(/\.[a-zA-Z0-9]+$/)) {
+        return res.status(404).send("File not found");
+      }
+      
+      // Serve index.html for SPA routing
       const indexPath = path.resolve(staticBasePath!, "index.html");
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
@@ -378,12 +388,19 @@ function serveStatic(app: Express) {
       }
     });
   } else {
-    console.warn("Static files directory not found. Serving fallback HTML.");
-    // Fallback: serve a basic HTML page
+    console.warn("Static files directory not found. Tried paths:", possibleBasePaths.map(p => path.resolve(p, "dist", "public")).join(", "));
+    // Fallback: serve a basic HTML page that tries to load assets
     app.use("*", (req, res) => {
       if (req.path.startsWith("/api")) {
         return res.status(404).json({ error: "Not found" });
       }
+      
+      // For file requests, return 404
+      if (req.path.match(/\.[a-zA-Z0-9]+$/)) {
+        return res.status(404).send("File not found");
+      }
+      
+      // For HTML requests, return a basic page
       res.status(200).send(`
         <!DOCTYPE html>
         <html lang="it">
@@ -407,6 +424,7 @@ function serveStatic(app: Express) {
             <h1>Mathilde Studio</h1>
             <p>Sartoria Artigianale Italiana</p>
             <p>L'applicazione è in caricamento...</p>
+            <p style="font-size: 12px; color: #666;">Se questa pagina persiste, i file statici potrebbero non essere stati deployati correttamente.</p>
           </body>
         </html>
       `);
