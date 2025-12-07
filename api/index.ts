@@ -4,9 +4,52 @@ import 'dotenv/config';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import express, { type Request, Response, NextFunction, type Express } from 'express';
 import { createServer, type Server } from 'http';
+import path from 'path';
+import fs from 'fs';
 import { randomUUID } from 'crypto';
 import nodemailer from 'nodemailer';
 import { z } from 'zod';
+
+let envLogged = false;
+
+function logOnceEnvironment() {
+  if (envLogged) return;
+  envLogged = true;
+  try {
+    console.log(`[env] NODE_ENV=${process.env.NODE_ENV} VERCEL=${process.env.VERCEL}`);
+    console.log(`[env] process.cwd()=${process.cwd()}`);
+    const cwdFiles = safeListDir(process.cwd(), 'cwd');
+    if (cwdFiles.includes('dist')) {
+      safeListDir(path.join(process.cwd(), 'dist'), 'dist/');
+      safeListDir(path.join(process.cwd(), 'dist', 'public'), 'dist/public/');
+    }
+    if (cwdFiles.includes('client')) {
+      const clientFiles = safeListDir(path.join(process.cwd(), 'client'), 'client/');
+      if (clientFiles.includes('dist')) {
+        safeListDir(path.join(process.cwd(), 'client', 'dist'), 'client/dist/');
+        safeListDir(path.join(process.cwd(), 'client', 'dist', 'public'), 'client/dist/public/');
+      }
+      if (clientFiles.includes('public')) {
+        safeListDir(path.join(process.cwd(), 'client', 'public'), 'client/public/');
+      }
+      const clientIndex = path.join(process.cwd(), 'client', 'index.html');
+      console.log(`[env] client/index.html exists: ${fs.existsSync(clientIndex)}`);
+    }
+  } catch (e) {
+    console.error('[env] error while logging environment', e);
+  }
+}
+
+function safeListDir(dir: string, label: string): string[] {
+  try {
+    const files = fs.readdirSync(dir);
+    console.log(`[ls] ${label} (${dir}): ${files.slice(0, 15).join(', ')}`);
+    return files;
+  } catch (e) {
+    console.log(`[ls] ${label} (${dir}): error ${e instanceof Error ? e.message : String(e)}`);
+    return [];
+  }
+}
 
 // Inline schemas to avoid module resolution issues
 const insertNewsletterSubscriptionSchema = z.object({
@@ -348,6 +391,7 @@ async function ensureAppReady() {
   if (!initPromise) {
     initPromise = (async () => {
       try {
+        logOnceEnvironment();
         // Register routes
         await registerRoutes(app);
         
@@ -369,6 +413,7 @@ export default async function handler(
   res: VercelResponse
 ) {
   try {
+    console.log(`[req] ${req.method} ${req.url}`);
     await ensureAppReady();
     
     // Handle the request with Express app
