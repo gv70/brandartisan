@@ -350,6 +350,7 @@ function serveStatic(app: Express) {
   // But we need to handle the SPA routing fallback for non-API routes
   // Try to find the static files directory in various locations
   // On Vercel, includeFiles copies files to the function root
+  // But files might be in different locations after build
   const possiblePaths = [
     // Standard build output location
     path.resolve(process.cwd(), "dist", "public"),
@@ -360,6 +361,12 @@ function serveStatic(app: Express) {
     // Check if files are in client directory (from build)
     path.resolve(process.cwd(), "client", "dist", "public"),
     path.resolve("/var/task", "client", "dist", "public"),
+    // Check if client/public exists (source files)
+    path.resolve(process.cwd(), "client", "public"),
+    path.resolve("/var/task", "client", "public"),
+    // Check if index.html is directly in client/
+    path.resolve(process.cwd(), "client"),
+    path.resolve("/var/task", "client"),
     // Alternative locations
     path.resolve(process.cwd(), "..", "dist", "public"),
     path.resolve("/var/task", "..", "dist", "public"),
@@ -375,6 +382,10 @@ function serveStatic(app: Express) {
       try {
         const distFiles = fs.readdirSync(path.resolve(process.cwd(), "dist"));
         console.log(`Files in dist/: ${distFiles.join(", ")}`);
+        if (distFiles.includes("public")) {
+          const distPublicFiles = fs.readdirSync(path.resolve(process.cwd(), "dist", "public"));
+          console.log(`Files in dist/public/: ${distPublicFiles.slice(0, 10).join(", ")}...`);
+        }
       } catch (e) {
         console.error("Error reading dist:", e);
       }
