@@ -353,10 +353,22 @@ function serveStatic(app: Express) {
   let staticBasePath: string | null = null;
   for (const basePath of possibleBasePaths) {
     const testPath = path.resolve(basePath, "dist", "public");
-    if (fs.existsSync(testPath) && fs.existsSync(path.resolve(testPath, "index.html"))) {
-      staticBasePath = testPath;
-      console.log(`Found static files at: ${staticBasePath}`);
-      break;
+    console.log(`Checking path: ${testPath}, exists: ${fs.existsSync(testPath)}`);
+    if (fs.existsSync(testPath)) {
+      const indexPath = path.resolve(testPath, "index.html");
+      console.log(`Checking index.html at: ${indexPath}, exists: ${fs.existsSync(indexPath)}`);
+      if (fs.existsSync(indexPath)) {
+        staticBasePath = testPath;
+        console.log(`✓ Found static files at: ${staticBasePath}`);
+        // List some files to verify
+        try {
+          const files = fs.readdirSync(testPath);
+          console.log(`Files in static directory: ${files.slice(0, 5).join(", ")}...`);
+        } catch (e) {
+          console.error("Error reading directory:", e);
+        }
+        break;
+      }
     }
   }
   
