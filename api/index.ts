@@ -8,8 +8,52 @@ import fs from 'fs';
 import { createServer, type Server } from 'http';
 import { randomUUID } from 'crypto';
 import nodemailer from 'nodemailer';
-import { insertNewsletterSubscriptionSchema, insertConsultationRequestSchema, insertGiftRequestSchema, type NewsletterSubscription, type InsertNewsletterSubscription, type ConsultationRequest, type InsertConsultationRequest, type GiftRequest, type InsertGiftRequest } from '@shared/schema';
 import { z } from 'zod';
+
+// Inline schemas to avoid module resolution issues
+const insertNewsletterSubscriptionSchema = z.object({
+  email: z.string().email(),
+});
+
+const insertConsultationRequestSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  message: z.string().optional(),
+  service: z.enum(['su-misura', 'collezione']),
+});
+
+const insertGiftRequestSchema = z.object({
+  nome: z.string().min(1),
+  email: z.string().email(),
+  telefono: z.string().optional(),
+  nomeDestinatario: z.string().min(1),
+  messaggio: z.string().optional(),
+  importo: z.string().optional(),
+});
+
+type InsertNewsletterSubscription = z.infer<typeof insertNewsletterSubscriptionSchema>;
+type NewsletterSubscription = InsertNewsletterSubscription & {
+  id: string;
+  subscribedAt: Date;
+};
+
+type InsertConsultationRequest = z.infer<typeof insertConsultationRequestSchema>;
+type ConsultationRequest = InsertConsultationRequest & {
+  id: string;
+  phone: string | null;
+  message: string | null;
+  createdAt: Date;
+};
+
+type InsertGiftRequest = z.infer<typeof insertGiftRequestSchema>;
+type GiftRequest = InsertGiftRequest & {
+  id: string;
+  telefono: string | null;
+  messaggio: string | null;
+  importo: string | null;
+  createdAt: Date;
+};
 
 // Inline storage implementation to avoid module resolution issues
 class MemStorage {
