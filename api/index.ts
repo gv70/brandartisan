@@ -340,16 +340,54 @@ async function registerRoutes(app: Express): Promise<Server> {
 
 // Serve static files
 function serveStatic(app: Express) {
-  const distPath = path.resolve(process.cwd(), "dist", "public");
+  // Try multiple possible paths for static files on Vercel
+  const possiblePaths = [
+    path.resolve(process.cwd(), "dist", "public"),
+    path.resolve(process.cwd(), ".vercel", "output", "static"),
+    path.resolve("/var/task", "dist", "public"),
+    path.resolve("/var/task", ".vercel", "output", "static"),
+  ];
   
-  if (!fs.existsSync(distPath)) {
-    console.warn(`Build directory not found: ${distPath}`);
+  let distPath: string | null = null;
+  for (const possiblePath of possiblePaths) {
+    if (fs.existsSync(possiblePath)) {
+      distPath = possiblePath;
+      break;
+    }
+  }
+  
+  if (!distPath) {
+    console.warn(`Build directory not found. Tried: ${possiblePaths.join(", ")}`);
+    // Return a simple HTML response for non-API routes
+    app.use("*", (req, res) => {
+      if (req.path.startsWith("/api")) {
+        return res.status(404).json({ error: "Not found" });
+      }
+      res.status(200).send(`
+        <!DOCTYPE html>
+        <html>
+          <head><title>Mathilde Studio</title></head>
+          <body>
+            <h1>Mathilde Studio</h1>
+            <p>Application is running. Static files are being built.</p>
+          </body>
+        </html>
+      `);
+    });
     return;
   }
 
   app.use(express.static(distPath));
-  app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+  app.use("*", (req, res) => {
+    if (req.path.startsWith("/api")) {
+      return res.status(404).json({ error: "Not found" });
+    }
+    const indexPath = path.resolve(distPath!, "index.html");
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.status(404).send("Not found");
+    }
   });
 }
 
