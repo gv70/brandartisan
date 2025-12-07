@@ -369,6 +369,30 @@ function serveStatic(app: Express) {
   try {
     const cwdFiles = fs.readdirSync(process.cwd());
     console.log(`Files in process.cwd() (${process.cwd()}): ${cwdFiles.slice(0, 10).join(", ")}...`);
+    
+    // Check if dist exists
+    if (cwdFiles.includes("dist")) {
+      try {
+        const distFiles = fs.readdirSync(path.resolve(process.cwd(), "dist"));
+        console.log(`Files in dist/: ${distFiles.join(", ")}`);
+      } catch (e) {
+        console.error("Error reading dist:", e);
+      }
+    }
+    
+    // Check if client/dist exists
+    if (cwdFiles.includes("client")) {
+      try {
+        const clientFiles = fs.readdirSync(path.resolve(process.cwd(), "client"));
+        console.log(`Files in client/: ${clientFiles.join(", ")}`);
+        if (clientFiles.includes("dist")) {
+          const clientDistFiles = fs.readdirSync(path.resolve(process.cwd(), "client", "dist"));
+          console.log(`Files in client/dist/: ${clientDistFiles.join(", ")}`);
+        }
+      } catch (e) {
+        console.error("Error reading client:", e);
+      }
+    }
   } catch (e) {
     console.error("Error reading cwd:", e);
   }
