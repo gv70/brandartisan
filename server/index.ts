@@ -36,36 +36,68 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
-  const server = await registerRoutes(app);
+import { type Server } from "http";
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+// Initialize app function - can be called multiple times safely
+let initialized = false;
+let initPromise: Promise<Server | null> | null = null;
+let serverInstance: Server | null = null;
 
-    res.status(status).json({ message });
-    throw err;
-  });
+async function initializeApp(): Promise<Server | null> {
+  if (initialized && serverInstance) return serverInstance;
+  if (initPromise) return initPromise;
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+  initPromise = (async () => {
+    const server = await registerRoutes(app);
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-  });
-})();
+    app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+      const status = err.status || err.statusCode || 500;
+      const message = err.message || "Internal Server Error";
+
+      res.status(status).json({ message });
+      throw err;
+    });
+
+    // importantly only setup vite in development and after
+    // setting up all the other routes so the catch-all route
+    // doesn't interfere with the other routes
+    if (app.get("env") === "development") {
+      await setupVite(app, server);
+    } else {
+      serveStatic(app);
+    }
+
+    initialized = true;
+    serverInstance = server;
+    return server;
+  })();
+
+  return initPromise;
+}
+
+// Start server only if not running on Vercel
+if (!process.env.VERCEL) {
+  (async () => {
+    const server = await initializeApp();
+    if (server) {
+      // ALWAYS serve the app on the port specified in the environment variable PORT
+      // Other ports are firewalled. Default to 5000 if not specified.
+      // this serves both the API and the client.
+      // It is the only port that is not firewalled.
+      const port = parseInt(process.env.PORT || '5000', 10);
+      server.listen({
+        port,
+        host: "0.0.0.0",
+        reusePort: true,
+      }, () => {
+        log(`serving on port ${port}`);
+      });
+    }
+  })();
+} else {
+  // For Vercel, just initialize the app without starting the server
+  initializeApp();
+}
+
+// Export app for Vercel (will be used by api/index.ts)
+export { app, initializeApp };
