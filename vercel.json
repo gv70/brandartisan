@@ -5,18 +5,14 @@
   "framework": null,
   "builds": [
     {
-      "src": "dist/public/**",
-      "use": "@vercel/static"
-    },
-    {
       "src": "api/index.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.ts" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+    { "src": "/api/(.*)", "dest": "/api/index.ts" }
+  ],
+  "outputDirectory": "dist/public"
 }
 
 
