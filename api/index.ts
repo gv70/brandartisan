@@ -357,6 +357,9 @@ function serveStatic(app: Express) {
     // Function root (where includeFiles might copy files)
     path.resolve(process.cwd(), "public"),
     path.resolve("/var/task", "public"),
+    // Check if files are in client directory (from build)
+    path.resolve(process.cwd(), "client", "dist", "public"),
+    path.resolve("/var/task", "client", "dist", "public"),
     // Alternative locations
     path.resolve(process.cwd(), "..", "dist", "public"),
     path.resolve("/var/task", "..", "dist", "public"),
@@ -419,7 +422,7 @@ function serveStatic(app: Express) {
       }
     });
   } else {
-    console.warn("Static files directory not found. Tried paths:", possibleBasePaths.map(p => path.resolve(p, "dist", "public")).join(", "));
+    console.warn("Static files directory not found. Tried paths:", possiblePaths.join(", "));
     // Fallback: serve a basic HTML page that tries to load assets
     app.use("*", (req, res) => {
       if (req.path.startsWith("/api")) {
