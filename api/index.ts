@@ -349,16 +349,29 @@ function serveStatic(app: Express) {
   // On Vercel, static files should be served by Vercel itself via outputDirectory
   // But we need to handle the SPA routing fallback for non-API routes
   // Try to find the static files directory in various locations
-  const possibleBasePaths = [
-    process.cwd(),
-    "/var/task",
-    path.resolve(process.cwd(), ".."),
-    path.resolve(process.cwd(), "..", ".."),
+  // On Vercel, includeFiles copies files to the function root
+  const possiblePaths = [
+    // Standard build output location
+    path.resolve(process.cwd(), "dist", "public"),
+    path.resolve("/var/task", "dist", "public"),
+    // Function root (where includeFiles might copy files)
+    path.resolve(process.cwd(), "public"),
+    path.resolve("/var/task", "public"),
+    // Alternative locations
+    path.resolve(process.cwd(), "..", "dist", "public"),
+    path.resolve("/var/task", "..", "dist", "public"),
   ];
   
+  // Also check what's in the current directory for debugging
+  try {
+    const cwdFiles = fs.readdirSync(process.cwd());
+    console.log(`Files in process.cwd() (${process.cwd()}): ${cwdFiles.slice(0, 10).join(", ")}...`);
+  } catch (e) {
+    console.error("Error reading cwd:", e);
+  }
+  
   let staticBasePath: string | null = null;
-  for (const basePath of possibleBasePaths) {
-    const testPath = path.resolve(basePath, "dist", "public");
+  for (const testPath of possiblePaths) {
     console.log(`Checking path: ${testPath}, exists: ${fs.existsSync(testPath)}`);
     if (fs.existsSync(testPath)) {
       const indexPath = path.resolve(testPath, "index.html");
@@ -369,7 +382,7 @@ function serveStatic(app: Express) {
         // List some files to verify
         try {
           const files = fs.readdirSync(testPath);
-          console.log(`Files in static directory: ${files.slice(0, 5).join(", ")}...`);
+          console.log(`Files in static directory (${files.length} total): ${files.slice(0, 5).join(", ")}...`);
         } catch (e) {
           console.error("Error reading directory:", e);
         }
