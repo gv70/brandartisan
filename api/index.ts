@@ -3,8 +3,6 @@
 import 'dotenv/config';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import express, { type Request, Response, NextFunction, type Express } from 'express';
-import path from 'path';
-import fs from 'fs';
 import { createServer, type Server } from 'http';
 import { randomUUID } from 'crypto';
 import nodemailer from 'nodemailer';
@@ -344,142 +342,6 @@ async function registerRoutes(app: Express): Promise<Server> {
   return httpServer;
 }
 
-// Serve static files (fallback only). Vercel should serve static assets directly.
-function serveStatic(app: Express) {
-  const possiblePaths = [
-    path.resolve(process.cwd(), "dist", "public"),
-    path.resolve("/var/task", "dist", "public"),
-    path.resolve(process.cwd(), "api", "static"),
-    path.resolve("/var/task", "api", "static"),
-    path.resolve(process.cwd(), "static"),
-    path.resolve("/var/task", "static"),
-    path.resolve(process.cwd(), "public"),
-    path.resolve("/var/task", "public"),
-    path.resolve(process.cwd(), "client", "dist", "public"),
-    path.resolve("/var/task", "client", "dist", "public"),
-    path.resolve(process.cwd(), "client", "public"),
-    path.resolve("/var/task", "client", "public"),
-    path.resolve(process.cwd(), "client"),
-    path.resolve("/var/task", "client"),
-    path.resolve(process.cwd(), "..", "dist", "public"),
-    path.resolve("/var/task", "..", "dist", "public"),
-  ];
-
-  try {
-    const cwdFiles = fs.readdirSync(process.cwd());
-    console.log(`Files in process.cwd() (${process.cwd()}): ${cwdFiles.slice(0, 10).join(", ")}...`);
-    if (cwdFiles.includes("dist")) {
-      const distFiles = fs.readdirSync(path.resolve(process.cwd(), "dist"));
-      console.log(`Files in dist/: ${distFiles.join(", ")}`);
-      if (distFiles.includes("public")) {
-        const distPublicFiles = fs.readdirSync(path.resolve(process.cwd(), "dist", "public"));
-        console.log(`Files in dist/public/: ${distPublicFiles.slice(0, 10).join(", ")}...`);
-      }
-    }
-    if (cwdFiles.includes("client")) {
-      const clientFiles = fs.readdirSync(path.resolve(process.cwd(), "client"));
-      console.log(`Files in client/: ${clientFiles.join(", ")}`);
-      if (clientFiles.includes("dist")) {
-        const clientDistFiles = fs.readdirSync(path.resolve(process.cwd(), "client", "dist"));
-        console.log(`Files in client/dist/: ${clientDistFiles.join(", ")}`);
-        if (clientDistFiles.includes("public")) {
-          const clientDistPublicFiles = fs.readdirSync(path.resolve(process.cwd(), "client", "dist", "public"));
-          console.log(`Files in client/dist/public/: ${clientDistPublicFiles.slice(0, 10).join(", ")}...`);
-        }
-      }
-      if (clientFiles.includes("public")) {
-        const clientPublicFiles = fs.readdirSync(path.resolve(process.cwd(), "client", "public"));
-        console.log(`Files in client/public/: ${clientPublicFiles.slice(0, 10).join(", ")}...`);
-      }
-      if (clientFiles.includes("index.html")) {
-        const indexPath = path.resolve(process.cwd(), "client", "index.html");
-        console.log(`index.html directly in client/: ${fs.existsSync(indexPath)}`);
-      }
-    }
-  } catch (e) {
-    console.error("Error reading cwd:", e);
-  }
-
-  let staticBasePath: string | null = null;
-  for (const testPath of possiblePaths) {
-    console.log(`Checking path: ${testPath}, exists: ${fs.existsSync(testPath)}`);
-    if (fs.existsSync(testPath)) {
-      const indexPath = path.resolve(testPath, "index.html");
-      console.log(`Checking index.html at: ${indexPath}, exists: ${fs.existsSync(indexPath)}`);
-      if (fs.existsSync(indexPath)) {
-        staticBasePath = testPath;
-        console.log(`✓ Found static files at: ${staticBasePath}`);
-        try {
-          const files = fs.readdirSync(testPath);
-          console.log(`Files in static directory (${files.length} total): ${files.slice(0, 5).join(", ")}...`);
-        } catch (e) {
-          console.error("Error reading directory:", e);
-        }
-        break;
-      }
-    }
-  }
-
-  if (staticBasePath) {
-    app.use(express.static(staticBasePath, {
-      maxAge: '1y',
-      etag: true,
-      immutable: true,
-    }));
-    app.use("*", (req, res) => {
-      if (req.path.startsWith("/api")) {
-        return res.status(404).json({ error: "Not found" });
-      }
-      if (req.path.match(/\.[a-zA-Z0-9]+$/)) {
-        return res.status(404).send("File not found");
-      }
-      const indexPath = path.resolve(staticBasePath!, "index.html");
-      if (fs.existsSync(indexPath)) {
-        res.sendFile(indexPath);
-      } else {
-        res.status(404).send("Not found");
-      }
-    });
-  } else {
-    console.warn("Static files directory not found. Tried paths:", possiblePaths.join(", "));
-    app.use("*", (req, res) => {
-      if (req.path.startsWith("/api")) {
-        return res.status(404).json({ error: "Not found" });
-      }
-      if (req.path.match(/\.[a-zA-Z0-9]+$/)) {
-        return res.status(404).send("File not found");
-      }
-      res.status(200).send(`
-        <!DOCTYPE html>
-        <html lang="it">
-          <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Mathilde Studio - Sartoria Artigianale</title>
-            <style>
-              body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                margin: 0;
-                padding: 40px;
-                background: #f8f6f4;
-                color: #0b3d2e;
-                text-align: center;
-              }
-              h1 { font-family: 'Playfair Display', serif; }
-            </style>
-          </head>
-          <body>
-            <h1>Mathilde Studio</h1>
-            <p>Sartoria Artigianale Italiana</p>
-            <p>L'applicazione è in caricamento...</p>
-            <p style="font-size: 12px; color: #666;">Se questa pagina persiste, i file statici potrebbero non essere stati deployati correttamente.</p>
-          </body>
-        </html>
-      `);
-    });
-  }
-}
-
 async function ensureAppReady() {
   if (appReady) return;
   
@@ -488,9 +350,6 @@ async function ensureAppReady() {
       try {
         // Register routes
         await registerRoutes(app);
-        
-        // Serve static files in production
-        serveStatic(app);
         
         appReady = true;
       } catch (error) {

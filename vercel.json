@@ -5,23 +5,17 @@
   "framework": null,
   "builds": [
     {
+      "src": "dist/public/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "api/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": "api/static/**",
-        "maxLambdaSize": "50mb"
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.ts"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.ts"
-    }
+    { "src": "/api/(.*)", "dest": "/api/index.ts" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
 
