@@ -39,17 +39,23 @@ type NewsletterSubscription = InsertNewsletterSubscription & {
 };
 
 type InsertConsultationRequest = z.infer<typeof insertConsultationRequestSchema>;
-type ConsultationRequest = InsertConsultationRequest & {
+type ConsultationRequest = {
   id: string;
+  name: string;
+  email: string;
   phone: string | null;
   message: string | null;
+  service: 'su-misura' | 'collezione';
   createdAt: Date;
 };
 
 type InsertGiftRequest = z.infer<typeof insertGiftRequestSchema>;
-type GiftRequest = InsertGiftRequest & {
+type GiftRequest = {
   id: string;
+  nome: string;
+  email: string;
   telefono: string | null;
+  nomeDestinatario: string;
   messaggio: string | null;
   importo: string | null;
   createdAt: Date;
@@ -392,7 +398,7 @@ function serveStatic(app: Express) {
       }
       
       // Serve index.html for SPA routing
-      const indexPath = path.resolve(staticBasePath!, "index.html");
+      const indexPath = path.resolve(staticBasePath, "index.html");
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
