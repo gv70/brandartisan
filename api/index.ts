@@ -344,70 +344,62 @@ async function registerRoutes(app: Express): Promise<Server> {
   return httpServer;
 }
 
-// Serve static files
+// Serve static files (fallback only). Vercel should serve static assets directly.
 function serveStatic(app: Express) {
-  // On Vercel, static files should be served by Vercel itself via outputDirectory
-  // But we need to handle the SPA routing fallback for non-API routes
-  // Try to find the static files directory in various locations
-  // On Vercel, includeFiles copies files to the function root
-  // But files might be in different locations after build
   const possiblePaths = [
-    // Standard build output location
     path.resolve(process.cwd(), "dist", "public"),
     path.resolve("/var/task", "dist", "public"),
-    // Function root (where includeFiles might copy files)
+    path.resolve(process.cwd(), "api", "static"),
+    path.resolve("/var/task", "api", "static"),
+    path.resolve(process.cwd(), "static"),
+    path.resolve("/var/task", "static"),
     path.resolve(process.cwd(), "public"),
     path.resolve("/var/task", "public"),
-    // Check if files are in client directory (from build)
     path.resolve(process.cwd(), "client", "dist", "public"),
     path.resolve("/var/task", "client", "dist", "public"),
-    // Check if client/public exists (source files)
     path.resolve(process.cwd(), "client", "public"),
     path.resolve("/var/task", "client", "public"),
-    // Check if index.html is directly in client/
     path.resolve(process.cwd(), "client"),
     path.resolve("/var/task", "client"),
-    // Alternative locations
     path.resolve(process.cwd(), "..", "dist", "public"),
     path.resolve("/var/task", "..", "dist", "public"),
   ];
-  
-  // Also check what's in the current directory for debugging
+
   try {
     const cwdFiles = fs.readdirSync(process.cwd());
     console.log(`Files in process.cwd() (${process.cwd()}): ${cwdFiles.slice(0, 10).join(", ")}...`);
-    
-    // Check if dist exists
     if (cwdFiles.includes("dist")) {
-      try {
-        const distFiles = fs.readdirSync(path.resolve(process.cwd(), "dist"));
-        console.log(`Files in dist/: ${distFiles.join(", ")}`);
-        if (distFiles.includes("public")) {
-          const distPublicFiles = fs.readdirSync(path.resolve(process.cwd(), "dist", "public"));
-          console.log(`Files in dist/public/: ${distPublicFiles.slice(0, 10).join(", ")}...`);
-        }
-      } catch (e) {
-        console.error("Error reading dist:", e);
+      const distFiles = fs.readdirSync(path.resolve(process.cwd(), "dist"));
+      console.log(`Files in dist/: ${distFiles.join(", ")}`);
+      if (distFiles.includes("public")) {
+        const distPublicFiles = fs.readdirSync(path.resolve(process.cwd(), "dist", "public"));
+        console.log(`Files in dist/public/: ${distPublicFiles.slice(0, 10).join(", ")}...`);
       }
     }
-    
-    // Check if client/dist exists
     if (cwdFiles.includes("client")) {
-      try {
-        const clientFiles = fs.readdirSync(path.resolve(process.cwd(), "client"));
-        console.log(`Files in client/: ${clientFiles.join(", ")}`);
-        if (clientFiles.includes("dist")) {
-          const clientDistFiles = fs.readdirSync(path.resolve(process.cwd(), "client", "dist"));
-          console.log(`Files in client/dist/: ${clientDistFiles.join(", ")}`);
+      const clientFiles = fs.readdirSync(path.resolve(process.cwd(), "client"));
+      console.log(`Files in client/: ${clientFiles.join(", ")}`);
+      if (clientFiles.includes("dist")) {
+        const clientDistFiles = fs.readdirSync(path.resolve(process.cwd(), "client", "dist"));
+        console.log(`Files in client/dist/: ${clientDistFiles.join(", ")}`);
+        if (clientDistFiles.includes("public")) {
+          const clientDistPublicFiles = fs.readdirSync(path.resolve(process.cwd(), "client", "dist", "public"));
+          console.log(`Files in client/dist/public/: ${clientDistPublicFiles.slice(0, 10).join(", ")}...`);
         }
-      } catch (e) {
-        console.error("Error reading client:", e);
+      }
+      if (clientFiles.includes("public")) {
+        const clientPublicFiles = fs.readdirSync(path.resolve(process.cwd(), "client", "public"));
+        console.log(`Files in client/public/: ${clientPublicFiles.slice(0, 10).join(", ")}...`);
+      }
+      if (clientFiles.includes("index.html")) {
+        const indexPath = path.resolve(process.cwd(), "client", "index.html");
+        console.log(`index.html directly in client/: ${fs.existsSync(indexPath)}`);
       }
     }
   } catch (e) {
     console.error("Error reading cwd:", e);
   }
-  
+
   let staticBasePath: string | null = null;
   for (const testPath of possiblePaths) {
     console.log(`Checking path: ${testPath}, exists: ${fs.existsSync(testPath)}`);
@@ -417,7 +409,6 @@ function serveStatic(app: Express) {
       if (fs.existsSync(indexPath)) {
         staticBasePath = testPath;
         console.log(`✓ Found static files at: ${staticBasePath}`);
-        // List some files to verify
         try {
           const files = fs.readdirSync(testPath);
           console.log(`Files in static directory (${files.length} total): ${files.slice(0, 5).join(", ")}...`);
@@ -428,28 +419,21 @@ function serveStatic(app: Express) {
       }
     }
   }
-  
+
   if (staticBasePath) {
-    // Serve static files with proper caching
     app.use(express.static(staticBasePath, {
       maxAge: '1y',
       etag: true,
       immutable: true,
     }));
-    
-    // Fallback to index.html for SPA routing (only for non-API, non-file requests)
     app.use("*", (req, res) => {
       if (req.path.startsWith("/api")) {
         return res.status(404).json({ error: "Not found" });
       }
-      
-      // Check if it's a file request (has extension)
       if (req.path.match(/\.[a-zA-Z0-9]+$/)) {
         return res.status(404).send("File not found");
       }
-      
-      // Serve index.html for SPA routing
-      const indexPath = path.resolve(staticBasePath, "index.html");
+      const indexPath = path.resolve(staticBasePath!, "index.html");
       if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
       } else {
@@ -458,18 +442,13 @@ function serveStatic(app: Express) {
     });
   } else {
     console.warn("Static files directory not found. Tried paths:", possiblePaths.join(", "));
-    // Fallback: serve a basic HTML page that tries to load assets
     app.use("*", (req, res) => {
       if (req.path.startsWith("/api")) {
         return res.status(404).json({ error: "Not found" });
       }
-      
-      // For file requests, return 404
       if (req.path.match(/\.[a-zA-Z0-9]+$/)) {
         return res.status(404).send("File not found");
       }
-      
-      // For HTML requests, return a basic page
       res.status(200).send(`
         <!DOCTYPE html>
         <html lang="it">
