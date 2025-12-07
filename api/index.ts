@@ -340,55 +340,78 @@ async function registerRoutes(app: Express): Promise<Server> {
 
 // Serve static files
 function serveStatic(app: Express) {
-  // Try multiple possible paths for static files on Vercel
-  const possiblePaths = [
-    path.resolve(process.cwd(), "dist", "public"),
-    path.resolve(process.cwd(), ".vercel", "output", "static"),
-    path.resolve("/var/task", "dist", "public"),
-    path.resolve("/var/task", ".vercel", "output", "static"),
+  // On Vercel, we need to serve static files from the function
+  // Try to find the static files directory
+  const possibleBasePaths = [
+    process.cwd(),
+    "/var/task",
+    path.resolve(process.cwd(), ".."),
   ];
   
-  let distPath: string | null = null;
-  for (const possiblePath of possiblePaths) {
-    if (fs.existsSync(possiblePath)) {
-      distPath = possiblePath;
+  let staticBasePath: string | null = null;
+  for (const basePath of possibleBasePaths) {
+    const testPath = path.resolve(basePath, "dist", "public");
+    if (fs.existsSync(testPath) && fs.existsSync(path.resolve(testPath, "index.html"))) {
+      staticBasePath = testPath;
       break;
     }
   }
   
-  if (!distPath) {
-    console.warn(`Build directory not found. Tried: ${possiblePaths.join(", ")}`);
-    // Return a simple HTML response for non-API routes
+  if (staticBasePath) {
+    console.log(`Serving static files from: ${staticBasePath}`);
+    // Serve static files
+    app.use(express.static(staticBasePath, {
+      maxAge: '1y',
+      etag: true,
+    }));
+    
+    // Fallback to index.html for SPA routing
+    app.use("*", (req, res) => {
+      if (req.path.startsWith("/api")) {
+        return res.status(404).json({ error: "Not found" });
+      }
+      const indexPath = path.resolve(staticBasePath!, "index.html");
+      if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+      } else {
+        res.status(404).send("Not found");
+      }
+    });
+  } else {
+    console.warn("Static files directory not found. Serving fallback HTML.");
+    // Fallback: serve a basic HTML page
     app.use("*", (req, res) => {
       if (req.path.startsWith("/api")) {
         return res.status(404).json({ error: "Not found" });
       }
       res.status(200).send(`
         <!DOCTYPE html>
-        <html>
-          <head><title>Mathilde Studio</title></head>
+        <html lang="it">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Mathilde Studio - Sartoria Artigianale</title>
+            <style>
+              body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                margin: 0;
+                padding: 40px;
+                background: #f8f6f4;
+                color: #0b3d2e;
+                text-align: center;
+              }
+              h1 { font-family: 'Playfair Display', serif; }
+            </style>
+          </head>
           <body>
             <h1>Mathilde Studio</h1>
-            <p>Application is running. Static files are being built.</p>
+            <p>Sartoria Artigianale Italiana</p>
+            <p>L'applicazione è in caricamento...</p>
           </body>
         </html>
       `);
     });
-    return;
   }
-
-  app.use(express.static(distPath));
-  app.use("*", (req, res) => {
-    if (req.path.startsWith("/api")) {
-      return res.status(404).json({ error: "Not found" });
-    }
-    const indexPath = path.resolve(distPath!, "index.html");
-    if (fs.existsSync(indexPath)) {
-      res.sendFile(indexPath);
-    } else {
-      res.status(404).send("Not found");
-    }
-  });
 }
 
 async function ensureAppReady() {

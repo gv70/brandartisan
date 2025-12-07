@@ -1,13 +1,15 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/public",
   "installCommand": "npm install",
   "framework": null,
   "builds": [
     {
       "src": "api/index.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": "dist/public/**"
+      }
     }
   ],
   "routes": [
