@@ -76,8 +76,11 @@ async function initializeApp(): Promise<Server | null> {
   return initPromise;
 }
 
-// Start server only if not running on Vercel
-if (!process.env.VERCEL) {
+// Start server only if not running on Vercel and not imported as module
+const isVercel = process.env.VERCEL === '1' || process.env.VERCEL === 'true';
+const isMainModule = import.meta.url === `file://${process.argv[1]}` || !import.meta.url.includes('/api/');
+
+if (!isVercel && isMainModule) {
   (async () => {
     const server = await initializeApp();
     if (server) {
@@ -91,9 +94,6 @@ if (!process.env.VERCEL) {
       });
     }
   })();
-} else {
-  // For Vercel, just initialize the app without starting the server
-  initializeApp();
 }
 
 // Export app for Vercel (will be used by api/index.ts)
