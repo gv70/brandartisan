@@ -16,6 +16,12 @@
       "dest": "/api/index.ts"
     },
     {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|mp4|webm|json))",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
